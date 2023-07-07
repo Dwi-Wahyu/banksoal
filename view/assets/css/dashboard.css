@@ -1,0 +1,57 @@
+.info-box {
+    padding: 1rem;
+    background-color: rgb(57, 57, 243);
+    width: fit-content;
+    border-radius: 5px;
+    /* flex-grow: 4; */
+    width: 25%;
+    justify-content: space-between;
+    margin-right: 1rem;
+    display: flex;
+}
+
+.info-box-word {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-box-word p,
+.info-box-word h1 {
+    margin: 0;
+    line-height: 1;
+    color: white;
+}
+
+.info-box-word p {
+    font-size: 0.75rem;
+    font-family: "Open Sans", sans-serif;
+    margin: 0 0 0.5rem 0;
+}
+
+.info-box-word h1 {
+    font-size: 1.8rem;
+}
+
+.info-box i {
+    font-size: 3rem;
+    line-height: 0;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.info-wrap {
+    display: flex;
+    width: 100%;
+}
+
+.info-card {
+    padding-right: 0.7rem;
+}
+
+.info-card h1 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+}

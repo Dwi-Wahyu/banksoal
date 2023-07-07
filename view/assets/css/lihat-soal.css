@@ -1,0 +1,46 @@
+.judul-btn {
+    width: 100% !important;
+    display: block;
+    background-color: #5bc0de;
+    color: white;
+    border-radius: 2px;
+    padding: 4px;
+    margin: 0.5rem 0;
+    text-align: center;
+}
+
+.subjudul-soal ul li {
+    list-style-type: decimal;
+}
+
+.subjudul-soal {
+    margin: 0.5rem 0;
+}
+
+.subjudul-soal label {
+    margin-bottom: 0.2rem;
+    margin-top: 0.5rem;
+    font-weight: 700;
+}
+
+#tabel tbody td:nth-child(3) img {
+    width: 100px;
+}
+
+#tabel thead th:nth-child(1) {
+    width: 4%;
+}
+
+#tabel thead th:nth-child(3) {
+    width: 10%;
+}
+
+#tabel thead th:nth-child(4),
+#tabel thead th:nth-child(5),
+#tabel thead th:nth-child(6) {
+    width: 7%;
+}
+
+p {
+    margin-bottom: 0;
+}
