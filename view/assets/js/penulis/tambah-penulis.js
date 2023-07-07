@@ -1,4 +1,3 @@
-var inpUser = document.getElementById("user");
 var inpEmail = document.getElementById("email");
 var popup = document.getElementsByClassName("popup-info-wrap")[0];
 var popupSuccess = document.getElementById("popup-success");
@@ -36,16 +35,6 @@ form.addEventListener("submit", (e) => {
     } else {
         alert("Ketik ulang password dengan baik");
     }
-});
-
-function simpan() {}
-
-email.addEventListener("keyup", () => {
-    user.value = email.value;
-});
-
-user.addEventListener("keyup", () => {
-    email.value = user.value;
 });
 
 for (let i = 0; i < closePopup.length; i++) {

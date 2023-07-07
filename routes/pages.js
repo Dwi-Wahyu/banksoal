@@ -7,7 +7,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/dashboard", (req, res) => {
-    res.sendFile("dashboard.html", { root: "./view" });
+    // res.sendFile("dashboard.html", { root: "./view" });
+    res.render("dashboard");
 });
 
 router.post("/login", login);
