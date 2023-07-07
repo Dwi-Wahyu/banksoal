@@ -18,12 +18,13 @@
 .login-card {
     position: relative;
     background-color: white;
-    height: fit-content;
+    height: 19rem;
+    width: 18.5rem;
+    border: rgb(190, 190, 190) solid thin;
     border-radius: 5px;
     display: flex;
-    height: fit-content;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 1rem;
 }
 
@@ -125,6 +126,10 @@
     justify-content: center;
     margin-bottom: 0.5rem !important;
     align-items: center;
+}
+
+.title p {
+    text-align: center;
 }
 
 .title-brand img {
