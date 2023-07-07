@@ -45,3 +45,5 @@ app.use(express.static(__dirname + "/view/"));
 app.listen(port, (e) => {
     console.log("Menerima sambungan pada ", port);
 });
+
+// push dari wahyu
