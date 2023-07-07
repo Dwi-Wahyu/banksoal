@@ -159,7 +159,7 @@
 
                 <li class="nav-item">
                     <a
-                        class="nav-link collapsed"
+                        class="nav-link"
                         data-bs-target="#components-nav"
                         data-bs-toggle="collapse"
                         href="#"
@@ -175,17 +175,20 @@
                     </a>
                     <ul
                         id="components-nav"
-                        class="nav-content collapse"
+                        class="nav-content collapse show"
                         data-bs-parent="#sidebar-nav"
                     >
                         <li>
-                            <a href="/tulis-soal/form-soal-teori">
+                            <a
+                                href="/tulis-soal/daftar-soal-teori"
+                                class="active"
+                            >
                                 <i class="bi bi-circle"></i
                                 ><span>Tulis Soal Uji Teori</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/tulis-soal/form-soal-praktek">
+                            <a href="/tulis-soal/daftar-soal-praktek">
                                 <i class="bi bi-circle"></i
                                 ><span>Tulis Soal Uji Praktek</span>
                             </a>
@@ -216,13 +219,13 @@
                         data-bs-parent="#sidebar-nav"
                     >
                         <li>
-                            <a href="/telaah-soal-teori">
+                            <a href="/telaah-soal/telaah-soal-teori">
                                 <i class="bi bi-circle"></i
                                 ><span>Telaah Soal Uji Teori</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/telaah-soal-praktek">
+                            <a href="/telaah-soal/telaah-soal-praktek">
                                 <i class="bi bi-circle"></i
                                 ><span>Telaah Soal Uji Praktek</span>
                             </a>
@@ -232,7 +235,10 @@
                 <!-- End Forms Nav -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/penulis/daftar-penulis">
+                    <a
+                        class="nav-link collapsed"
+                        href="/penulis/daftar-penulis"
+                    >
                         <span
                             class="material-symbols-outlined"
                             style="margin-right: 5px"
@@ -258,7 +264,7 @@
                     >
                         <button
                             class="btn btn-primary"
-                            onclick="location.href='/form-soal-teori'"
+                            onclick="location.href='/tulis-soal/form-soal-teori'"
                         >
                             <i class="bi bi-plus-lg"></i>
                             Tambah Soal Uji Teori

@@ -28,7 +28,7 @@ const db = require("./utils/db");
 const buatSoal = require("./controllers/buatSoal");
 const tambahSoal = require("./controllers/soal-teori");
 const penulisRoute = require("./routes/penulis");
-const soalRotue = require("./routes/soal");
+const soalRoute = require("./routes/soal");
 
 var hash = crypto.MD5("Message").toString();
 var ciphertext = crypto.AES.encrypt("my message", "secret key 123").toString();
@@ -37,7 +37,8 @@ var originalText = bytes.toString(crypto.enc.Utf8);
 
 app.use("/", pages);
 app.use("/penulis", penulisRoute);
-app.use("/tulis-soal", soalRotue);
+app.use("/tulis-soal", soalRoute);
+app.use("/telaah-soal", soalRoute);
 app.post("/buat-soal", upload.single("gambar"), buatSoal);
 
 app.use(express.static(__dirname + "/view/"));
