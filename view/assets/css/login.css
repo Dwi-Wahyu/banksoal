@@ -177,7 +177,7 @@ body {
 .title {
     line-height: 1;
     color: black;
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .title p {
@@ -185,7 +185,7 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
     .gambar {
         background-color: white !important;
     }
@@ -194,13 +194,14 @@ body {
         height: 40vh;
         width: 100%;
         overflow: hidden;
-        border-radius: 20px;
-        padding: 10px;
+        background-color: white !important;
+        border-radius: 0 0 20px 20px;
+        /* padding: 10px; */
     }
 
     .card-wrapper {
         width: 100%;
-        background-color: white;
+        /* background-color: white; */
         height: 60vh;
         position: absolute;
         display: block;
@@ -209,8 +210,9 @@ body {
 
     .login-card {
         border: none;
-        padding-top: 0;
+        /* padding-top: 0; */
         height: 60vh;
+        box-shadow: none !important;
         display: block;
         width: 100%;
     }
@@ -220,6 +222,6 @@ body {
     }
 
     .tombol {
-        width: 30%;
+        border-radius: 20px;
     }
 }
