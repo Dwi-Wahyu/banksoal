@@ -25,7 +25,6 @@ app.set("views", "./view");
 
 const pages = require("./routes/pages");
 const db = require("./utils/db");
-const buatSoal = require("./controllers/buatSoal");
 const tambahSoal = require("./controllers/soal-teori");
 const penulisRoute = require("./routes/penulis");
 const soalRoute = require("./routes/soal");
@@ -39,9 +38,12 @@ app.use("/", pages);
 app.use("/penulis", penulisRoute);
 app.use("/tulis-soal", soalRoute);
 app.use("/telaah-soal", soalRoute);
-app.post("/buat-soal", upload.single("gambar"), buatSoal);
 
 app.use(express.static(__dirname + "/view/"));
+
+app.get("/login", (req, res) => {
+    res.render("login");
+});
 
 app.listen(port, (e) => {
     console.log("Menerima sambungan pada ", port);

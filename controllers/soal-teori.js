@@ -30,11 +30,45 @@ const daftarSoal = (req, res) => {
                 var resultData = [];
                 con.query(sql, (err, data) => {
                     if (err) throw err;
+
+                    let nomor;
+                    switch (nomor.length) {
+                        case 1:
+                            nomor = `000${item.nomor}`;
+                            break;
+                        case 2:
+                            nomor = `00${item.nomor}`;
+                            break;
+                        case 3:
+                            nomor = `0${item.nomor}`;
+                            break;
+                        case 4:
+                            nomor = `${item.nomor}`;
+                            break;
+                    }
+                    var bulan = [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                    ];
+                    var tanggal = new Date();
                     data.forEach((item) => {
                         resultData.push({
                             tbl_nomor: item.nomor,
-                            tbl_email: item.email,
-                            tbl_nama: item.first_name + " " + item.last_name,
+                            tbl_pertanyaan_vignette:
+                                item.pertanyaan + item.vignette,
+                            tbl_register: `${nomor}/${item.departemen}/3/${
+                                bulan[tanggal.getMonth]
+                            }/${tanggal.getFullYear()}`,
                             tbl_status: item.status,
                             tbl_id: item.id,
                         });

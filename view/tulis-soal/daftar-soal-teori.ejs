@@ -116,7 +116,7 @@
                             <li>
                                 <a
                                     class="dropdown-item d-flex align-items-center"
-                                    href="users-profile.html"
+                                    href="/penulis/profil"
                                 >
                                     <i class="bi bi-person"></i>
                                     <span>My Profile</span>
@@ -318,13 +318,7 @@
         ></a>
 
         <!-- Vendor JS Files -->
-        <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
         <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/vendor/chart.js/chart.umd.js"></script>
-        <script src="../assets/vendor/echarts/echarts.min.js"></script>
-        <script src="../assets/vendor/quill/quill.min.js"></script>
-        <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
-        <script src="../assets/vendor/php-email-form/validate.js"></script>
 
         <!-- Datatable -->
         <script src="../assets/vendor/datatables/code.jquery.com_jquery-3.5.1.js"></script>
@@ -336,7 +330,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "/penulis/daftar-penulis/data",
+                    url: "/tulis-soal/daftar-soal-teori/data",
                     type: "GET",
                 },
                 paging: true,
@@ -346,8 +340,11 @@
                 ],
                 columns: [
                     { data: "tbl_nomor", title: "No" },
-                    { data: "tbl_email", title: "Register" },
-                    { data: "tbl_nama", title: "Vignette & Pertanyaan" },
+                    {
+                        data: "tbl_pertanyaan_vignette",
+                        title: "Vignette & Pertanyaan",
+                    },
+                    { data: "tbl_register", title: "Register" },
                     { data: "tbl_status", title: "Status" },
                 ],
                 columnDefs: [
@@ -382,7 +379,7 @@
             $("#example tbody").on("click", "#lihat-detail", function () {
                 var data = table.row($(this).parents("tr")).data();
 
-                location.href = `/penulis/detail-penulis/${data.tbl_id}`;
+                // location.href = `/penulis/detail-penulis/${data.tbl_id}`;
             });
         </script>
 

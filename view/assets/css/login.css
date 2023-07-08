@@ -2,7 +2,11 @@
     margin: 0 !important;
 }
 
-#main {
+body {
+    background-color: white !important;
+}
+
+/* #main {
     width: 100%;
     background-image: url("/assets/img/login-pict.jpg");
     background-size: 100%;
@@ -13,12 +17,35 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+} */
+
+#main {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.gambar img {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.card-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    bottom: 0.1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .login-card {
     position: relative;
     background-color: white;
     height: 19rem;
+
     width: 18.5rem;
     border: rgb(190, 190, 190) solid thin;
     border-radius: 5px;
@@ -120,9 +147,7 @@
 
 .title-brand {
     width: 100%;
-    /* margin-bottom: 1rem !important; */
     display: flex;
-    /* justify-content: center; */
     justify-content: center;
     margin-bottom: 0.5rem !important;
     align-items: center;
@@ -158,4 +183,43 @@
 .title p {
     font-size: 1rem;
     font-family: "Poppins", sans-serif;
+}
+
+@media screen and (max-width: 800px) {
+    .gambar {
+        background-color: white !important;
+    }
+
+    .gambar img {
+        height: 40vh;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    .card-wrapper {
+        width: 100%;
+        background-color: white;
+        height: 60vh;
+        position: absolute;
+        display: block;
+        top: 40vh;
+    }
+
+    .login-card {
+        border: none;
+        padding-top: 0;
+        height: 60vh;
+        display: block;
+        width: 100%;
+    }
+
+    .right {
+        display: none;
+    }
+
+    .tombol {
+        width: 30%;
+    }
 }

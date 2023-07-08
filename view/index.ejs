@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <!-- <meta content="width=device-width, initial-scale=1.0" name="viewport" /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>BANKSOAL FKG</title>
         <meta content="" name="description" />
@@ -59,7 +60,11 @@
 
     <body>
         <main id="main" class="main">
-            <div class="left">
+            <div class="gambar">
+                <img src="./assets/img/login-pict.jpg" alt="" />
+            </div>
+
+            <div class="card-wrapper">
                 <div class="card login-card">
                     <div class="title">
                         <div class="title-brand">
@@ -67,16 +72,6 @@
                             <h1>BANK<span>SOAL</span></h1>
                         </div>
                         <p>Aplikasi Bank Soal - FKG Unhas</p>
-                    </div>
-
-                    <div
-                        class="alert alert-warning mb-2 perhatian"
-                        role="alert"
-                    >
-                        <span class="material-symbols-outlined">
-                            disabled_by_default
-                        </span>
-                        <span id="err_message"> Pesan error </span>
                     </div>
 
                     <form id="form">
@@ -103,11 +98,23 @@
                             <i class="bi bi-eye-slash" id="togglePassword"></i>
                         </div>
 
-                        <button type="submit" class="tombol">Log in</button>
+                        <div class="tombol-wrap">
+                            <button type="submit" class="tombol">Log in</button>
+                        </div>
+
+                        <div
+                            class="alert alert-warning mt-3 perhatian"
+                            role="alert"
+                        >
+                            <span class="material-symbols-outlined">
+                                disabled_by_default
+                            </span>
+                            <span id="err_message"> Pesan error </span>
+                        </div>
                     </form>
                 </div>
+                <div class="right"></div>
             </div>
-            <div class="right"></div>
         </main>
         <!-- End #main -->
 
