@@ -5,6 +5,9 @@ const inpTinjauan3 = document.getElementById("tinjauan3");
 const inpKunci = document.getElementById("kunci");
 const inpDepartemen = document.getElementById("departemen");
 const msg = document.getElementById("warning-msg");
+var popup = document.getElementsByClassName("popup-info-wrap")[0];
+var popupSuccess = document.getElementById("popup-success");
+var closePopup = document.getElementsByClassName("closebtn");
 
 function checkEmpty(variabel) {
     if (variabel.length > 0) {
@@ -58,53 +61,39 @@ form.addEventListener("submit", (e) => {
         "pertanyaan / intruksi<br>"
     )}`;
 
-    let formData = new FormData();
-    formData.append("tinjauan1", tinjauan1);
-    formData.append("tinjauan2", tinjauan2);
-    formData.append("tinjauan3", tinjauan3);
-    formData.append("kunci", kunci);
-    formData.append("departemen", departemen);
-    formData.append("gambar", gambar);
-    formData.append("JawabanA", jawabanA);
-    formData.append("jawabanB", jawabanB);
-    formData.append("jawabanC", jawabanC);
-    formData.append("jawabanD", jawabanD);
-    formData.append("jawabanE", jawabanE);
-    formData.append("alasan", alasan);
-    formData.append("referensi", referensi);
-    formData.append("vignette", vignette);
-    formData.append("pertanyaan", pertanyaan);
+    if (err.length > 0) {
+        msg.innerHTML = err;
+        $("#pesan-error").show();
+    } else {
+        $("#pesan-error").hide();
+        popup.style.display = "block";
+        popupSuccess.style.display = "flex";
+        let formData = new FormData();
+        formData.append("tinjauan1", tinjauan1);
+        formData.append("tinjauan2", tinjauan2);
+        formData.append("tinjauan3", tinjauan3);
+        formData.append("kunci", kunci);
+        formData.append("departemen", departemen);
+        formData.append("gambar", gambar);
+        formData.append("JawabanA", jawabanA);
+        formData.append("jawabanB", jawabanB);
+        formData.append("jawabanC", jawabanC);
+        formData.append("jawabanD", jawabanD);
+        formData.append("jawabanE", jawabanE);
+        formData.append("alasan", alasan);
+        formData.append("referensi", referensi);
+        formData.append("vignette", vignette);
+        formData.append("pertanyaan", pertanyaan);
 
-    fetch("/tulis-soal/form-soal-teori/tambah-soal", {
-        method: "POST",
-        body: formData,
-    });
-
-    // if (err.length > 0) {
-    //     msg.innerHTML = err;
-    //     $("#pesan-error").show();
-    // } else {
-    //     $("#pesan-error").hide();
-    //     let formData = new FormData();
-    //     formData.append("tinjauan1", tinjauan1);
-    //     formData.append("tinjauan2", tinjauan2);
-    //     formData.append("tinjauan3", tinjauan3);
-    //     formData.append("kunci", kunci);
-    //     formData.append("departemen", departemen);
-    //     formData.append("gambar", gambar);
-    //     formData.append("JawabanA", jawabanA);
-    //     formData.append("jawabanB", jawabanB);
-    //     formData.append("jawabanC", jawabanC);
-    //     formData.append("jawabanD", jawabanD);
-    //     formData.append("jawabanE", jawabanE);
-    //     formData.append("alasan", alasan);
-    //     formData.append("referensi", referensi);
-    //     formData.append("vignette", vignette);
-    //     formData.append("pertanyaan", pertanyaan);
-
-    //     fetch("/tulis-soal/form-soal-teori/tambah-soal", {
-    //         method: "POST",
-    //         body: formData,
-    //     });
-    // }
+        fetch("/tulis-soal/form-soal-teori/tambah-soal", {
+            method: "POST",
+            body: formData,
+        });
+    }
 });
+
+for (let i = 0; i < closePopup.length; i++) {
+    closePopup[i].addEventListener("click", function () {
+        popup.style.display = "none";
+    });
+}

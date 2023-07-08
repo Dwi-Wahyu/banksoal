@@ -40,17 +40,6 @@
             rel="stylesheet"
         />
         <link
-            href="../assets/vendor/boxicons/css/boxicons.min.css"
-            rel="stylesheet"
-        />
-        <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet" />
-        <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
-        <link
-            href="../assets/vendor/remixicon/remixicon.css"
-            rel="stylesheet"
-        />
-
-        <link
             rel="stylesheet"
             href="../assets/vendor/datatables/cdn.datatables.net_1.13.4_css_dataTables.bootstrap5.min.css"
         />
@@ -62,7 +51,7 @@
         <!-- Template Main CSS File -->
         <link href="../assets/css/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="../assets/css/template.css" />
-        <link rel="stylesheet" href="../assets/css/buat-soal.css" />
+        <link rel="stylesheet" href="../assets/css/daftar-soal.css" />
     </head>
 
     <body>
@@ -340,11 +329,11 @@
                 ],
                 columns: [
                     { data: "tbl_nomor", title: "No" },
+                    { data: "tbl_register", title: "Register" },
                     {
                         data: "tbl_pertanyaan_vignette",
                         title: "Vignette & Pertanyaan",
                     },
-                    { data: "tbl_register", title: "Register" },
                     { data: "tbl_status", title: "Status" },
                 ],
                 columnDefs: [
@@ -360,11 +349,11 @@
                         width: "15%",
                         targets: 3,
                         render: function (data, type, row) {
-                            if (data == 1) {
-                                return "<button class='btn btn-success p-1'>Sedang Aktif</button>";
-                            } else {
-                                return "<button class='badge badge-warning'>Sedang offline</button>";
-                            }
+                            return `<button class='status-soal'>${data}</button>`;
+                            // if (data == 1) {
+                            // } else {
+                            //     return "<button class='badge badge-warning'>Sedang offline</button>";
+                            // }
                         },
                     },
                     {

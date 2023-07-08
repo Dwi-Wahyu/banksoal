@@ -1,0 +1,10 @@
+table tbody tr td p {
+    margin: 0;
+}
+
+.status-soal {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
