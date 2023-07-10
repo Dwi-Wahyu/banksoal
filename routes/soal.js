@@ -4,6 +4,8 @@ const router = express.Router();
 const {
     TambahSoalTeori,
     DaftarSoalTeori,
+    LihatSoalTeori,
+    UbahSoalTeori,
 } = require("../controllers/soal-teori");
 
 const storageTeori = multer.diskStorage({
@@ -33,6 +35,10 @@ router.get("/daftar-soal-teori/data", DaftarSoalTeori);
 router.get("/daftar-soal-praktek", (req, res) => {
     res.render("tulis-soal/daftar-soal-praktek");
 });
+
+router.get("/lihat-soal/:id", LihatSoalTeori);
+
+router.get("/ubah-soal-teori/:id", UbahSoalTeori);
 
 router.post(
     "/form-soal-teori/tambah-soal",

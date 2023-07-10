@@ -56,9 +56,7 @@ const daftarSoal = (req, res) => {
                             tbl_nomor: item.nomor,
                             tbl_pertanyaan_vignette:
                                 item.pertanyaan + "<br>" + item.vignette,
-                            tbl_register: `${nomorSoal}/${item.departemen}/${
-                                item.pembuat
-                            }/${tanggal.getMonth()}/${tanggal.getFullYear()}`,
+                            tbl_register: `${nomorSoal}/${item.departemen}/${item.pembuat}/${item.bulan}/${item.tahun}`,
                             tbl_status: item.status,
                             tbl_id: item.id,
                         });
@@ -77,8 +75,6 @@ const daftarSoal = (req, res) => {
 };
 
 const tambahSoal = (req, res) => {
-    console.log(req.body);
-
     const id = randomize(32);
     const {
         tinjauan1,
@@ -97,11 +93,13 @@ const tambahSoal = (req, res) => {
         pertanyaan,
     } = req.body;
 
+    const tanggal = new Date();
+
     if (req.file == undefined) {
         res.status(200).json({ message: "tidak ada gambar" });
-
-        // const skl = `INSERT INTO soal_teori VALUES (NULL, 'TmZYV1RkUHpIVnBicXdDbzVTb1krZz09', '03', '01.1', '03.1', '01.1', 'ini vignette', 'ini pertanyaan', '', 'a', 'b', 'c', 'd', 'e', 'A', '11', 'alasan', 'referensi yahahahyuyk');`;
-        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '03', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${alasan}', '${referensi}', 'di Lokal')`;
+        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '03', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${alasan}', '${referensi}', 'di Lokal', ${
+            tanggal.getMonth() + 1
+        }, ${tanggal.getFullYear()})`;
         con.query(sql, (err, result) => {
             if (err) throw err;
             console.log(result);
@@ -109,8 +107,10 @@ const tambahSoal = (req, res) => {
     } else {
         res.status(200).json({ message: "ada gambar" });
         const gambarPath = req.file.path;
-
-        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '03','${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '${gambarPath}', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${alasan}', '${referensi}', 'di Lokal')`;
+        const replacedGambarPath = gambarPath.split("\\").join("\\\\");
+        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '03','${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '${replacedGambarPath}', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${alasan}', '${referensi}', 'di Lokal', ${
+            tanggal.getMonth() + 1
+        }, ${tanggal.getFullYear()})`;
         con.query(sql, (err, result) => {
             if (err) throw err;
             console.log(result);
@@ -118,4 +118,23 @@ const tambahSoal = (req, res) => {
     }
 };
 
-module.exports = { TambahSoalTeori: tambahSoal, DaftarSoalTeori: daftarSoal };
+const lihatSoal = (req, res) => {
+    const sql = `SELECT * FROM soal_teori WHERE id = '${req.params.id}'`;
+    con.query(sql, (err, result) => {
+        res.render("tulis-soal/lihat-soal/lihat-soal-teori", { data: result });
+    });
+};
+
+const ubahSoal = (req, res) => {
+    const sql = `SELECT * FROM soal_teori WHERE id = '${req.params.id}'`;
+    con.query(sql, (err, result) => {
+        res.render("tulis-soal/lihat-soal/ubah-soal-teori", { data: result });
+    });
+};
+
+module.exports = {
+    TambahSoalTeori: tambahSoal,
+    DaftarSoalTeori: daftarSoal,
+    LihatSoalTeori: lihatSoal,
+    UbahSoalTeori: ubahSoal,
+};

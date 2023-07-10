@@ -353,14 +353,10 @@
                         width: "37%",
                     },
                     {
-                        width: "15%",
+                        width: "13%",
                         targets: 3,
                         render: function (data, type, row) {
                             return `<button class='status-soal'>${data}</button>`;
-                            // if (data == 1) {
-                            // } else {
-                            //     return "<button class='badge badge-warning'>Sedang offline</button>";
-                            // }
                         },
                     },
                     {
@@ -375,9 +371,25 @@
             $("#example tbody").on("click", "#lihat-detail", function () {
                 var data = table.row($(this).parents("tr")).data();
 
-                // location.href = `/penulis/detail-penulis/${data.tbl_id}`;
+                location.href = `/tulis-soal/lihat-soal/${data.tbl_id}`;
             });
         </script>
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
 
         <!-- Template Main JS File -->
         <script src="../assets/js/main.js"></script>

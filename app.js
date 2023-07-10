@@ -39,7 +39,8 @@ app.use("/penulis", penulisRoute);
 app.use("/tulis-soal", soalRoute);
 app.use("/telaah-soal", soalRoute);
 
-app.use(express.static(__dirname + "/view/"));
+app.use(express.static(__dirname + "/view"));
+app.use(express.static(__dirname + "/view/assets"));
 
 app.get("/login", (req, res) => {
     res.render("login");
