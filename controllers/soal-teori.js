@@ -1,5 +1,6 @@
 const express = require("express");
 const randomize = require("./random");
+const fs = require("fs");
 const con = require("../utils/db").koneksi;
 
 const daftarSoal = (req, res) => {
@@ -132,9 +133,27 @@ const ubahSoal = (req, res) => {
     });
 };
 
+const ubahGambar = (req, res) => {
+    const gambarPath = req.file.path;
+    const replacedGambarPath = gambarPath.split("\\").join("\\\\");
+    const sql = `SELECT gambar FROM soal_teori WHERE id = '${req.params.id}'`;
+    con.query(sql, (err, result) => {
+        fs.unlink(result[0].gambar, (err) => {
+            if (err) throw err;
+        });
+        console.log(result[0].gambar);
+        const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+        });
+    });
+};
+
 module.exports = {
     TambahSoalTeori: tambahSoal,
     DaftarSoalTeori: daftarSoal,
     LihatSoalTeori: lihatSoal,
     UbahSoalTeori: ubahSoal,
+    UbahGambarTeori: ubahGambar,
 };

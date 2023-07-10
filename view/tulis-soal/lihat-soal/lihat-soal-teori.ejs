@@ -63,6 +63,7 @@
         <!-- Template Main CSS File -->
         <link href="../../assets/css/style.css" rel="stylesheet" />
         <link rel="stylesheet" href="../../assets/css/template.css" />
+        <link rel="stylesheet" href="../../assets/css/profil.css" />
         <link rel="stylesheet" href="../../assets/css/lihat-soal.css" />
     </head>
 
@@ -79,7 +80,7 @@
                     class="logo d-flex align-items-center"
                     style="width: 100%"
                 >
-                    <img src="../assets/img/Logo-unhas.png" alt="" />
+                    <img src="../../assets/img/Logo-unhas.png" alt="" />
                     <span class="d-none d-lg-block">BANKSOAL FKG-UNHAS</span>
                 </a>
             </div>
@@ -291,6 +292,7 @@
                                 <img
                                     src="../../../<%= result.gambar %>"
                                     alt=""
+                                    id="gambar-soal"
                                 />
                                 <% } else { %>
                                 <img
@@ -357,7 +359,13 @@
                             >
                                 Ubah Soal
                             </button>
-                            <button class="btn btn-primary">Ubah Gambar</button>
+                            <button
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#ganti-gambar"
+                            >
+                                Ubah Gambar
+                            </button>
                             <button class="btn btn-danger">Hapus Gambar</button>
                         </div>
                     </div>
@@ -366,13 +374,65 @@
         </main>
         <!-- End #main -->
 
-        <% } %>
+        <!-- modal ganti gambar -->
+        <div class="modal fade" id="ganti-gambar" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="form">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="font-weight: 600">
+                                Ganti Foto
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="gambar">
+                                <div class="input-gambar">
+                                    <input
+                                        type="file"
+                                        name="gambar"
+                                        id="gambar"
+                                        required
+                                        class="input-container mb-2"
+                                    />
+                                    <p>
+                                        <strong> Perhatian: </strong>
+                                        Gambar Tidak boleh lebih dari 512 KB
+                                        atau 0.5 MB, ukuran dimensi gambar
+                                        maksimal lebar 128 pixel dan tinggi 128
+                                        pixel.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="ganti-gambar"
+                            >
+                                Ganti Foto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Basic Modal-->
 
         <a
             href="#"
             class="back-to-top d-flex align-items-center justify-content-center"
             ><i class="bi bi-arrow-up-short"></i
         ></a>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
         <!-- Vendor JS Files -->
         <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -386,7 +446,23 @@
 
         <!-- Template Main JS File -->
         <script src="../../assets/js/main.js"></script>
-        <script src="../../assets/js/dashboard.js"></script>
+
+        <script>
+            const form = document.getElementById("form");
+
+            form.addEventListener("submit", (e) => {
+                const gambar = document.getElementById("gambar").files[0];
+
+                const formData = new FormData();
+                formData.append("gambarBaru", gambar);
+                fetch("/tulis-soal/lihat-soal/ubah-gambar/<%= result.id %>", {
+                    method: "POST",
+                    body: formData,
+                });
+            });
+        </script>
+
+        <% } %>
 
         <!-- bootstrap js -->
         <script

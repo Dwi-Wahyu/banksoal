@@ -6,6 +6,7 @@ const {
     DaftarSoalTeori,
     LihatSoalTeori,
     UbahSoalTeori,
+    UbahGambarTeori,
 } = require("../controllers/soal-teori");
 
 const storageTeori = multer.diskStorage({
@@ -39,6 +40,12 @@ router.get("/daftar-soal-praktek", (req, res) => {
 router.get("/lihat-soal/:id", LihatSoalTeori);
 
 router.get("/ubah-soal-teori/:id", UbahSoalTeori);
+
+router.post(
+    "/lihat-soal/ubah-gambar/:id",
+    uploadTeori.single("gambarBaru"),
+    UbahGambarTeori
+);
 
 router.post(
     "/form-soal-teori/tambah-soal",

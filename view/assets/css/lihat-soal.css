@@ -44,3 +44,7 @@
 p {
     margin-bottom: 0;
 }
+
+#gambar-soal {
+    max-width: 30rem;
+}
