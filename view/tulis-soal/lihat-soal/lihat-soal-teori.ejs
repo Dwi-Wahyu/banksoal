@@ -107,14 +107,6 @@
                         <ul
                             class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
                         >
-                            <!-- <li class="dropdown-header">
-                                <h6>Kevin Anderson</h6>
-                                <span>Web Designer</span>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li> -->
-
                             <li>
                                 <a
                                     class="dropdown-item d-flex align-items-center"
@@ -273,8 +265,9 @@
                             <label>No Register Soal</label>
                             <span> : </span>
                             <span>
-                                <%= result.nomor + "/" + result.departemen + "/"
-                                + result.bulan + "/" + result.tahun%></span
+                                <%= result.nomor + "/" + result.tinjauan1 + "/"
+                                + result.tinjauan2 + "/" + result.tinjauan3 +
+                                "/" + result.bulan + "/" + result.tahun%></span
                             >
                         </div>
                         <span class="judul-btn">Soal</span>
@@ -282,7 +275,9 @@
                             <label>Vignette</label>
 
                             <span> : </span> <br />
-                            <span><%- result.vignette %></span>
+                            <span class="vignetteDanPertanyaan"
+                                ><%- result.vignette %></span
+                            >
                         </div>
                         <div class="subjudul-soal">
                             <label>Gambar</label>
@@ -305,7 +300,9 @@
                         <div class="subjudul-soal">
                             <label>Pertanyaan / Intruksi</label>
                             <span> : </span> <br />
-                            <span><%- result.pertanyaan %></span>
+                            <span class="vignetteDanPertanyaan"
+                                ><%- result.pertanyaan %></span
+                            >
                         </div>
                         <div class="subjudul-soal">
                             <label>Pilihan A</label>
@@ -359,6 +356,8 @@
                             >
                                 Ubah Soal
                             </button>
+
+                            <% if (result.gambar) { %>
                             <button
                                 class="btn btn-primary"
                                 data-bs-toggle="modal"
@@ -366,6 +365,16 @@
                             >
                                 Ubah Gambar
                             </button>
+                            <% } else { %>
+                            <button
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#ganti-gambar"
+                            >
+                                Tambah Gambar
+                            </button>
+                            <% } %>
+
                             <button class="btn btn-danger">Hapus Gambar</button>
                         </div>
                     </div>
@@ -381,7 +390,7 @@
                     <form id="form">
                         <div class="modal-header">
                             <h5 class="modal-title" style="font-weight: 600">
-                                Ganti Foto
+                                Ganti Gambar
                             </h5>
                             <button
                                 type="button"
@@ -416,7 +425,7 @@
                                 class="btn btn-primary"
                                 id="ganti-gambar"
                             >
-                                Ganti Foto
+                                Ganti Gambar
                             </button>
                         </div>
                     </form>

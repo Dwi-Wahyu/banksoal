@@ -23,28 +23,14 @@
     font-weight: 700;
 }
 
-#tabel tbody td:nth-child(3) img {
-    width: 100px;
-}
-
-#tabel thead th:nth-child(1) {
-    width: 4%;
-}
-
-#tabel thead th:nth-child(3) {
-    width: 10%;
-}
-
-#tabel thead th:nth-child(4),
-#tabel thead th:nth-child(5),
-#tabel thead th:nth-child(6) {
-    width: 7%;
-}
-
 p {
     margin-bottom: 0;
 }
 
 #gambar-soal {
     max-width: 30rem;
+}
+
+.vignetteDanPertanyaan p {
+    display: inline;
 }

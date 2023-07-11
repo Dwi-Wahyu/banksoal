@@ -15,10 +15,9 @@ const daftarSoal = (req, res) => {
     var search_value = req.query.search["value"];
 
     var search = `AND (nomor LIKE '%${search_value}%'
-        OR vignette LIKE '%${search_value}%'
-        OR pertanyaan LIKE '%${search_value}%'
-        OR alasan_singkat LIKE '%${search_value}%'
-        OR referensi LIKE '%${search_value}%'
+        OR tinjauan1 LIKE '%${search_value}%'
+        OR tinjauan2 LIKE '%${search_value}%'
+        OR tinjauan3 LIKE '%${search_value}%'
     )`;
 
     con.query("SELECT COUNT(nomor) AS Total FROM soal_teori", (err, data) => {
@@ -53,14 +52,17 @@ const daftarSoal = (req, res) => {
                                 break;
                         }
 
-                        resultData.push({
-                            tbl_nomor: item.nomor,
-                            tbl_pertanyaan_vignette:
-                                item.vignette + "<br><br>" + item.pertanyaan,
-                            tbl_register: `${nomorSoal}/${item.departemen}/${item.pembuat}/${item.bulan}/${item.tahun}`,
-                            tbl_status: item.status,
-                            tbl_id: item.id,
-                        });
+                        if (item.vignette)
+                            resultData.push({
+                                tbl_nomor: item.nomor,
+                                tbl_pertanyaan_vignette:
+                                    item.vignette +
+                                    "<br><br>" +
+                                    item.pertanyaan,
+                                tbl_register: `${nomorSoal}/${item.tinjauan1}/${item.tinjauan2}/${item.tinjauan3}/${item.bulan}/${item.tahun}`,
+                                tbl_status: item.status,
+                                tbl_id: item.id,
+                            });
                     });
                     var output = {
                         draw: req.query.draw,
@@ -151,28 +153,28 @@ const ubahGambar = (req, res) => {
 };
 
 const updateSoal = (req, res) => {
-    // const {
-    //     tinjauan1,
-    //     tinjauan2,
-    //     tinjauan3,
-    //     kunci,
-    //     departemen,
-    //     jawabanA,
-    //     jawabanB,
-    //     jawabanC,
-    //     jawabanD,
-    //     jawabanE,
-    //     alasan,
-    //     referensi,
-    //     vignette,
-    //     pertanyaan,
-    // } = req.body;
-    // const sql = `UPDATE soal_teori SET tinjauan1 = '${tinjauan1}', tinjauan2 = '${tinjauan2}', tinjauan3 = '${tinjauan3}', vignette = '${vignette}', pertanyaan = '${pertanyaan}', jawabanA = '${jawabanA}', jawabanB = '${jawabanB}', jawabanC = '${jawabanC}', jawabanD = '${jawabanD}', jawabanE = '${jawabanE}', kunci = '${kunci}', departemen = '${departemen}', alasan_singkat = '${alasan}', referensi = '${referensi}' WHERE id = ${req.params.id};`;
-    // con.query(sql, (err, result) => {
-    //     if (err) throw err;
-    //     console.log(result);
-    // });
-    console.log(req.body);
+    const {
+        tinjauan1,
+        tinjauan2,
+        tinjauan3,
+        kunci,
+        departemen,
+        jawabanA,
+        jawabanB,
+        jawabanC,
+        jawabanD,
+        jawabanE,
+        alasan,
+        referensi,
+        vignette,
+        pertanyaan,
+    } = req.body;
+    const sql = `UPDATE soal_teori SET tinjauan1 = '${tinjauan1}', tinjauan2 = '${tinjauan2}', tinjauan3 = '${tinjauan3}', vignette = '${vignette}', pertanyaan = '${pertanyaan}', jawabanA = '${jawabanA}', jawabanB = '${jawabanB}', jawabanC = '${jawabanC}', jawabanD = '${jawabanD}', jawabanE = '${jawabanE}', kunci = '${kunci}', departemen = '${departemen}', alasan_singkat = '${alasan}', referensi = '${referensi}' WHERE id = '${req.params.id}';`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+    });
+    console.log(req.params.id);
 };
 
 module.exports = {

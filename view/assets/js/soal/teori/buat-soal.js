@@ -42,6 +42,8 @@ form.addEventListener("submit", (e) => {
     const vignette = tinymce.get("vignette").getContent();
     const pertanyaan = tinymce.get("pertanyaan").getContent();
 
+    console.log(vignette, pertanyaan);
+
     err = `${err}${setErr(checkEmpty(tinjauan1), "Tinjauan 1<br>")}`;
     err = `${err}${setErr(checkEmpty(tinjauan2), "Tinjauan 2<br>")}`;
     err = `${err}${setErr(checkEmpty(tinjauan3), "Tinjauan 3<br>")}`;
