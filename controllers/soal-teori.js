@@ -56,7 +56,7 @@ const daftarSoal = (req, res) => {
                         resultData.push({
                             tbl_nomor: item.nomor,
                             tbl_pertanyaan_vignette:
-                                item.pertanyaan + "<br>" + item.vignette,
+                                item.vignette + "<br><br>" + item.pertanyaan,
                             tbl_register: `${nomorSoal}/${item.departemen}/${item.pembuat}/${item.bulan}/${item.tahun}`,
                             tbl_status: item.status,
                             tbl_id: item.id,
@@ -150,10 +150,36 @@ const ubahGambar = (req, res) => {
     });
 };
 
+const updateSoal = (req, res) => {
+    // const {
+    //     tinjauan1,
+    //     tinjauan2,
+    //     tinjauan3,
+    //     kunci,
+    //     departemen,
+    //     jawabanA,
+    //     jawabanB,
+    //     jawabanC,
+    //     jawabanD,
+    //     jawabanE,
+    //     alasan,
+    //     referensi,
+    //     vignette,
+    //     pertanyaan,
+    // } = req.body;
+    // const sql = `UPDATE soal_teori SET tinjauan1 = '${tinjauan1}', tinjauan2 = '${tinjauan2}', tinjauan3 = '${tinjauan3}', vignette = '${vignette}', pertanyaan = '${pertanyaan}', jawabanA = '${jawabanA}', jawabanB = '${jawabanB}', jawabanC = '${jawabanC}', jawabanD = '${jawabanD}', jawabanE = '${jawabanE}', kunci = '${kunci}', departemen = '${departemen}', alasan_singkat = '${alasan}', referensi = '${referensi}' WHERE id = ${req.params.id};`;
+    // con.query(sql, (err, result) => {
+    //     if (err) throw err;
+    //     console.log(result);
+    // });
+    console.log(req.body);
+};
+
 module.exports = {
     TambahSoalTeori: tambahSoal,
     DaftarSoalTeori: daftarSoal,
     LihatSoalTeori: lihatSoal,
     UbahSoalTeori: ubahSoal,
     UbahGambarTeori: ubahGambar,
+    UpdateSoalTeori: updateSoal,
 };
