@@ -10,6 +10,11 @@ const login = (req, res) => {
             const sqlPass = `SELECT * FROM penulis WHERE password = '${pass}' AND email = '${user}'`;
             con.query(sqlPass, (err, hasil) => {
                 if (hasil.length > 0) {
+                    req.session.email = hasil[0].email;
+                    req.session.departemen = hasil[0].departemen;
+                    req.session.nama =
+                        hasil[0].first_name + " " + hasil[0].last_name;
+                    req.session.isAuthenticated = true;
                     res.status(201).json({ message: "Berhasil login" });
                 } else {
                     res.status(302).json({ message: "Password salah" });

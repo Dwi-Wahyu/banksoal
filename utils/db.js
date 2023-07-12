@@ -1,16 +1,18 @@
 const mysql = require("mysql");
 
-const con = mysql.createConnection({
+const pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "",
     database: "banksoal",
 });
 
+const connection = pool.getConnection((err, result) => {
+    if (err) throw err;
+    console.log("Terhubung ke database");
+});
+
 module.exports = {
-    connect: con.connect((err) => {
-        if (err) throw err;
-        console.log("Terhubung");
-    }),
-    koneksi: con,
+    connection,
+    koneksi: pool,
 };
