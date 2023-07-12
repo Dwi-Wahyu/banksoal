@@ -10,9 +10,10 @@ const port = process.env.PORT || 8080;
 
 const options = {
     host: "localhost",
-    user: "root",
-    password: "",
+    user: "banksoal",
+    password: "kucingmati1983",
     database: "banksoal",
+    port: "3306",
 };
 const age = 24 * 60 * 60 * 1000;
 const sessionStore = new mysqlStore(options);
