@@ -10,8 +10,8 @@ const port = process.env.PORT || 8080;
 
 const options = {
     host: "localhost",
-    user: "banksoal",
-    password: "kucingmati1983",
+    user: "root",
+    password: "",
     database: "banksoal",
     port: "3306",
 };
