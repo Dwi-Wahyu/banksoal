@@ -24,13 +24,14 @@ function setErr(empty, input) {
 
 const btn = document.getElementById("submit-btn");
 form.addEventListener("submit", (e) => {
-    var err = "";
     e.preventDefault();
+    var err = "";
     const tinjauan1 = $("#tinjauan1").val();
     const tinjauan2 = $("#tinjauan2").val();
     const tinjauan3 = $("#tinjauan3").val();
     const kunci = inpKunci.options[inpKunci.selectedIndex].value;
     const departemen = inpDepartemen.options[inpDepartemen.selectedIndex].value;
+    const nama_departemen = $("#departemen").select2("data")[0].text;
     const gambar = document.getElementById("gambar").files[0];
     const jawabanA = document.getElementById("jawaban_a").value;
     const jawabanB = document.getElementById("jawaban_b").value;
@@ -41,8 +42,6 @@ form.addEventListener("submit", (e) => {
     const referensi = document.getElementById("referensi").value;
     const vignette = tinymce.get("vignette").getContent();
     const pertanyaan = tinymce.get("pertanyaan").getContent();
-
-    console.log(vignette, pertanyaan);
 
     err = `${err}${setErr(checkEmpty(tinjauan1), "Tinjauan 1<br>")}`;
     err = `${err}${setErr(checkEmpty(tinjauan2), "Tinjauan 2<br>")}`;
@@ -73,6 +72,7 @@ form.addEventListener("submit", (e) => {
         formData.append("tinjauan3", tinjauan3);
         formData.append("kunci", kunci);
         formData.append("departemen", departemen);
+        formData.append("namaDepartemen", nama_departemen);
         formData.append("gambar", gambar);
         formData.append("jawabanA", jawabanA);
         formData.append("jawabanB", jawabanB);

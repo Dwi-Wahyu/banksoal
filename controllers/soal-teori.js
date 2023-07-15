@@ -3,6 +3,8 @@ const randomize = require("./random");
 const fs = require("fs");
 const con = require("../utils/db").koneksi;
 
+const teori = {};
+
 const daftarSoal = (req, res) => {
     if (typeof req.query.order == "undefined") {
         var column_name = "nomor";
@@ -15,66 +17,130 @@ const daftarSoal = (req, res) => {
     var search_value = req.query.search["value"];
 
     var search = `AND (nomor LIKE '%${search_value}%'
-        OR tinjauan1 LIKE '%${search_value}%'
+        OR tinjauan2 LIKE '%${search_value}%'
         OR tinjauan2 LIKE '%${search_value}%'
         OR tinjauan3 LIKE '%${search_value}%'
     )`;
 
-    con.query("SELECT COUNT(nomor) AS Total FROM soal_teori", (err, data) => {
-        var recordsTotal = data[0].Total;
-
+    if (req.session.isAdmin) {
         con.query(
-            `SELECT COUNT(nomor) AS Total FROM soal_teori WHERE 1 ${search}`,
-            (err, hasil) => {
-                var recordsFiltered = hasil[0].Total;
+            `SELECT COUNT(nomor) AS Total FROM soal_teori `,
+            (err, data) => {
+                var recordsTotal = data[0].Total;
 
-                var sql = `SELECT * FROM soal_teori WHERE 1 ${search} ORDER BY nomor ${column_sort_order} LIMIT ${req.query.start}, ${req.query.length} `;
-                var resultData = [];
-                con.query(sql, (err, data) => {
-                    if (err) throw err;
+                con.query(
+                    `SELECT COUNT(nomor) AS Total FROM soal_teori WHERE 1 ${search} `,
+                    (err, hasil) => {
+                        var recordsFiltered = hasil[0].Total;
 
-                    var tanggal = new Date();
-                    data.forEach((item) => {
-                        var nomorSoal;
-                        var nomorLength = item.nomor;
-                        switch (nomorLength.toString().length) {
-                            case 1:
-                                nomorSoal = `000${item.nomor}`;
-                                break;
-                            case 2:
-                                nomorSoal = `00${item.nomor}`;
-                                break;
-                            case 3:
-                                nomorSoal = `0${item.nomor}`;
-                                break;
-                            case 4:
-                                nomorSoal = `${item.nomor}`;
-                                break;
-                        }
+                        var sql = `SELECT * FROM soal_teori WHERE 1 ${search}  ORDER BY nomor ${column_sort_order} LIMIT ${req.query.start}, ${req.query.length} `;
+                        var resultData = [];
+                        con.query(sql, (err, data) => {
+                            if (err) throw err;
 
-                        if (item.vignette)
-                            resultData.push({
-                                tbl_nomor: item.nomor,
-                                tbl_pertanyaan_vignette:
-                                    item.vignette +
-                                    "<br><br>" +
-                                    item.pertanyaan,
-                                tbl_register: `${nomorSoal}/${item.tinjauan1}/${item.tinjauan2}/${item.tinjauan3}/${item.bulan}/${item.tahun}`,
-                                tbl_status: item.status,
-                                tbl_id: item.id,
+                            var tanggal = new Date();
+                            data.forEach((item) => {
+                                var nomorSoal;
+                                var nomorLength = item.nomor;
+                                switch (nomorLength.toString().length) {
+                                    case 1:
+                                        nomorSoal = `000${item.nomor}`;
+                                        break;
+                                    case 2:
+                                        nomorSoal = `00${item.nomor}`;
+                                        break;
+                                    case 3:
+                                        nomorSoal = `0${item.nomor}`;
+                                        break;
+                                    case 4:
+                                        nomorSoal = `${item.nomor}`;
+                                        break;
+                                }
+
+                                if (item.vignette)
+                                    resultData.push({
+                                        tbl_nomor: item.nomor,
+                                        tbl_pertanyaan_vignette:
+                                            item.vignette +
+                                            "<br><br>" +
+                                            item.pertanyaan,
+                                        tbl_register: `${nomorSoal}/${item.tinjauan1}/${item.tinjauan2}/${item.tinjauan3}/${item.bulan}/${item.tahun}`,
+                                        tbl_status: item.status,
+                                        tbl_id: item.id,
+                                    });
                             });
-                    });
-                    var output = {
-                        draw: req.query.draw,
-                        recordsTotal: recordsTotal,
-                        recordsFiltered: recordsFiltered,
-                        data: resultData,
-                    };
-                    res.json(output);
-                });
+                            var output = {
+                                draw: req.query.draw,
+                                recordsTotal: recordsTotal,
+                                recordsFiltered: recordsFiltered,
+                                data: resultData,
+                            };
+                            res.json(output);
+                        });
+                    }
+                );
             }
         );
-    });
+    } else {
+        con.query(
+            `SELECT COUNT(nomor) AS Total FROM soal_teori WHERE departemen = '${req.session.departemen}'`,
+            (err, data) => {
+                var recordsTotal = data[0].Total;
+
+                con.query(
+                    `SELECT COUNT(nomor) AS Total FROM soal_teori WHERE 1 ${search} AND departemen = '${req.session.departemen}'`,
+                    (err, hasil) => {
+                        var recordsFiltered = hasil[0].Total;
+
+                        var sql = `SELECT * FROM soal_teori WHERE 1 ${search} AND departemen = '${req.session.departemen}' ORDER BY nomor ${column_sort_order} LIMIT ${req.query.start}, ${req.query.length} `;
+                        var resultData = [];
+                        con.query(sql, (err, data) => {
+                            if (err) throw err;
+
+                            var tanggal = new Date();
+                            data.forEach((item) => {
+                                var nomorSoal;
+                                var nomorLength = item.nomor;
+                                switch (nomorLength.toString().length) {
+                                    case 1:
+                                        nomorSoal = `000${item.nomor}`;
+                                        break;
+                                    case 2:
+                                        nomorSoal = `00${item.nomor}`;
+                                        break;
+                                    case 3:
+                                        nomorSoal = `0${item.nomor}`;
+                                        break;
+                                    case 4:
+                                        nomorSoal = `${item.nomor}`;
+                                        break;
+                                }
+
+                                if (item.vignette)
+                                    resultData.push({
+                                        tbl_nomor: item.nomor,
+                                        tbl_pertanyaan_vignette:
+                                            item.vignette +
+                                            "<br><br>" +
+                                            item.pertanyaan,
+                                        tbl_register: `${nomorSoal}/${item.tinjauan1}/${item.tinjauan2}/${item.tinjauan3}/${item.bulan}/${item.tahun}`,
+                                        tbl_status: item.status,
+                                        tbl_id: item.id,
+                                    });
+                            });
+                            var output = {
+                                draw: req.query.draw,
+                                recordsTotal: recordsTotal,
+                                recordsFiltered: recordsFiltered,
+                                data: resultData,
+                            };
+                            res.json(output);
+                        });
+                    }
+                );
+            }
+        );
+    }
 };
 
 const tambahSoal = (req, res) => {
@@ -85,6 +151,7 @@ const tambahSoal = (req, res) => {
         tinjauan3,
         kunci,
         departemen,
+        namaDepartemen,
         jawabanA,
         jawabanB,
         jawabanC,
@@ -100,7 +167,9 @@ const tambahSoal = (req, res) => {
 
     if (req.file == undefined) {
         res.status(200).json({ message: "tidak ada gambar" });
-        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '03', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${alasan}', '${referensi}', 'di Lokal', ${
+        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
+            req.session.nama
+        }', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
             tanggal.getMonth() + 1
         }, ${tanggal.getFullYear()})`;
         con.query(sql, (err, result) => {
@@ -111,7 +180,9 @@ const tambahSoal = (req, res) => {
         res.status(200).json({ message: "ada gambar" });
         const gambarPath = req.file.path;
         const replacedGambarPath = gambarPath.split("\\").join("\\\\");
-        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '03','${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '${replacedGambarPath}', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${alasan}', '${referensi}', 'di Lokal', ${
+        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
+            req.session.nama
+        }','${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '${replacedGambarPath}', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
             tanggal.getMonth() + 1
         }, ${tanggal.getFullYear()})`;
         con.query(sql, (err, result) => {

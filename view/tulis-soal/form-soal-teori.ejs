@@ -105,7 +105,7 @@
                                 class="rounded-circle"
                             />
                             <span class="d-none d-md-block dropdown-toggle ps-2"
-                                >drg. Asyahra Maulidhina Haidir</span
+                                ><%= nama %></span
                             > </a
                         ><!-- End Profile Iamge Icon -->
 
@@ -128,7 +128,7 @@
                             <li>
                                 <a
                                     class="dropdown-item d-flex align-items-center"
-                                    href="#"
+                                    href="/signout"
                                 >
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>Sign Out</span>
@@ -144,6 +144,7 @@
         </header>
         <!-- End Header -->
 
+        <% if (departemen == "admin") { %>
         <!-- ======= Sidebar ======= -->
         <aside id="sidebar" class="sidebar">
             <ul class="sidebar-nav" id="sidebar-nav">
@@ -254,6 +255,66 @@
             </ul>
         </aside>
         <!-- End Sidebar-->
+        <% } else { %>
+        <!-- ======= Sidebar ======= -->
+        <aside id="sidebar" class="sidebar">
+            <ul class="sidebar-nav" id="sidebar-nav">
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="/dashboard">
+                        <span
+                            class="material-symbols-outlined"
+                            style="margin-right: 5px"
+                        >
+                            home
+                        </span>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <!-- End Dashboard Nav -->
+
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        data-bs-target="#components-nav"
+                        data-bs-toggle="collapse"
+                        href="#"
+                    >
+                        <span
+                            class="material-symbols-outlined"
+                            style="margin-right: 5px"
+                        >
+                            list_alt
+                        </span>
+                        <span>Tulis Soal</span
+                        ><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul
+                        id="components-nav"
+                        class="nav-content collapse show"
+                        data-bs-parent="#sidebar-nav"
+                    >
+                        <li>
+                            <a
+                                href="/tulis-soal/daftar-soal-teori"
+                                class="active"
+                            >
+                                <i class="bi bi-circle"></i
+                                ><span>Tulis Soal Uji Teori</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/tulis-soal/daftar-soal-praktek">
+                                <i class="bi bi-circle"></i
+                                ><span>Tulis Soal Uji Praktek</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Components Nav -->
+            </ul>
+        </aside>
+        <!-- End Sidebar-->
+        <% } %>
 
         <main id="main" class="main">
             <section class="section">
@@ -889,9 +950,22 @@
                     allowClear: true,
                 });
             });
+            $("#departemen").val("<%= departemen %>");
+            $("#departemen").prop("disabled", true);
         </script>
         <!-- /Select2 -->
 
+        <% if (departemen == "admin") { %>
+        <script>
+            // $("#departemen").val("<%= departemen %>");
+            $("#departemen").prop("disabled", false);
+        </script>
+        <% } else { %>
+        <script>
+            $("#departemen").val("<%= departemen %>");
+            $("#departemen").prop("disabled", true);
+        </script>
+        <% } %>
         <script>
             tinymce.init({
                 selector: "textarea.editor",

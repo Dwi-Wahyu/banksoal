@@ -28,12 +28,14 @@ router.get("/signout", (req, res) => {
 });
 
 router.get("/dashboard", auth, (req, res) => {
-    console.log(req.session.nama);
     const nama = req.session.nama;
     if (nama.includes("admin")) {
         res.render("dashboardAdmin", { nama: req.session.nama });
     } else {
-        res.render("dashboardPenulis", { nama: req.session.nama });
+        res.render("dashboardPenulis", {
+            nama: req.session.nama,
+            namaDepartemen: req.session.namaDepartemen,
+        });
     }
 });
 

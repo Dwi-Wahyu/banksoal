@@ -11,3 +11,8 @@
 #ubah {
     width: 8rem;
 }
+
+#tambah-penulis input,
+.input-penulis {
+    border: solid rgb(128, 128, 128) thin !important;
+}

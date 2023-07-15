@@ -4,7 +4,9 @@ const randomize = require("./random");
 const con = db.koneksi;
 
 const tambahPenulis = (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, departemen, namaDepartemen } =
+        req.body;
+
     console.log(req.body);
     const status = 1;
     const id = randomize(32);
@@ -12,7 +14,7 @@ const tambahPenulis = (req, res) => {
     con.query(sql, (err, data) => {
         console.log(data);
         if (data == "") {
-            var sql = `INSERT INTO penulis VALUES ('', '${id}','${email}', '${password}', '${firstName}', '${lastName}', '${status}')`;
+            var sql = `INSERT INTO penulis VALUES ('', '${id}', '${departemen}', '${namaDepartemen}','${email}', '${password}', '${firstName}', '${lastName}', '${status}')`;
             con.query(sql, function (err, result, field) {
                 if (err) throw err;
                 res.status(200).json({
@@ -84,11 +86,14 @@ const detailPenulis = (req, res) => {
 };
 
 const updatePenulis = (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
-
-    const sql = `UPDATE penulis SET password = '${password}', first_name = '${firstName}', last_name = '${lastName}' WHERE email = '${req.params.email}'`;
+    const { firstName, lastName, email, departemen, namaDepartemen } = req.body;
+    console.log(departemen);
+    console.log(namaDepartemen);
+    const sql = `UPDATE penulis SET first_name = '${firstName}', last_name = '${lastName}', email = '${email}', departemen = '${departemen}', nama_departemen = '${namaDepartemen}' WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
-        console.log(result);
+        if (result) {
+            res.status(201).json({ message: "Berhasil update data penulis" });
+        }
     });
 };
 

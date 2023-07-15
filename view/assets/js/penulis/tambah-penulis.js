@@ -13,8 +13,17 @@ form.addEventListener("submit", (e) => {
     const email = inpEmail.value;
     const password = document.getElementById("password").value;
     const repass = document.getElementById("repeat-password").value;
+    const departemen = $("#departemen").val();
+    const namaDepartemen = $("#departemen").select2("data")[0].text;
 
-    const data = { firstName, lastName, email, password };
+    const data = {
+        firstName,
+        lastName,
+        email,
+        password,
+        departemen,
+        namaDepartemen,
+    };
 
     if (repass == password) {
         fetch("/penulis/tambah-penulis", {

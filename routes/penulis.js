@@ -26,7 +26,7 @@ router.get("/detail-penulis/:id", detailPenulis);
 
 router.post("/tambah-penulis", tambahPenulis);
 
-router.post("/update-penulis/:email", updatePenulis);
+router.post("/update-penulis/:id", updatePenulis);
 
 router.get("/profil", (req, res) => {
     res.render("penulis/profil");

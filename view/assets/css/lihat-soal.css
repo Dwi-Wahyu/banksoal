@@ -27,10 +27,24 @@ p {
     margin-bottom: 0;
 }
 
-#gambar-soal {
-    max-width: 30rem;
+.gambar-soal {
+    max-width: 20rem;
+}
+
+.gambar-soal:nth-child(1) {
+    margin-right: 1rem;
 }
 
 .vignetteDanPertanyaan p {
     display: inline;
+}
+
+.skorNot {
+    background-color: rgb(175, 175, 175) !important;
+}
+
+#tabel thead th:nth-child(3),
+#tabel thead th:nth-child(4),
+#tabel thead th:nth-child(5) {
+    width: 7%;
 }

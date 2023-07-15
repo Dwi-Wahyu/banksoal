@@ -12,10 +12,17 @@ const login = (req, res) => {
                 if (hasil.length > 0) {
                     req.session.email = hasil[0].email;
                     req.session.departemen = hasil[0].departemen;
+                    req.session.namaDepartemen = hasil[0].nama_departemen;
                     req.session.nama =
                         hasil[0].first_name + " " + hasil[0].last_name;
                     req.session.isAuthenticated = true;
-                    res.status(201).json({ message: "Berhasil login" });
+                    if (hasil[0].email.includes("admin")) {
+                        req.session.isAdmin = true;
+                        res.status(201).json({ message: "Berhasil login" });
+                    } else {
+                        req.session.isAdmin = false;
+                        res.status(201).json({ message: "Berhasil login" });
+                    }
                 } else {
                     res.status(302).json({ message: "Password salah" });
                 }

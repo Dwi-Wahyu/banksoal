@@ -86,7 +86,7 @@
                                 class="rounded-circle"
                             />
                             <span class="d-none d-md-block dropdown-toggle ps-2"
-                                >drg. Asyahra Maulidhina Haidir</span
+                                ><%= nama %></span
                             > </a
                         ><!-- End Profile Iamge Icon -->
 
@@ -176,58 +176,6 @@
                     </ul>
                 </li>
                 <!-- End Components Nav -->
-
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        data-bs-target="#forms-nav"
-                        data-bs-toggle="collapse"
-                        href="#"
-                    >
-                        <span
-                            class="material-symbols-outlined"
-                            style="margin-right: 5px"
-                        >
-                            rate_review
-                        </span>
-                        <span>Telaah Soal Lokal</span
-                        ><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul
-                        id="forms-nav"
-                        class="nav-content collapse"
-                        data-bs-parent="#sidebar-nav"
-                    >
-                        <li>
-                            <a href="/telaah-soal/telaah-soal-teori">
-                                <i class="bi bi-circle"></i
-                                ><span>Telaah Soal Uji Teori</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/telaah-soal/telaah-soal-praktek">
-                                <i class="bi bi-circle"></i
-                                ><span>Telaah Soal Uji Praktek</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Forms Nav -->
-
-                <li class="nav-item">
-                    <a
-                        class="nav-link collapsed"
-                        href="/penulis/daftar-penulis"
-                    >
-                        <span
-                            class="material-symbols-outlined"
-                            style="margin-right: 5px"
-                        >
-                            attribution
-                        </span>
-                        <span>Daftar Penulis</span>
-                    </a>
-                </li>
             </ul>
         </aside>
         <!-- End Sidebar-->
@@ -235,18 +183,8 @@
         <main id="main" class="main">
             <div class="pagetitle d-flex justify-content-between">
                 <div class="row">
-                    <h1>Departemen Bedah Mulut</h1>
+                    <h1>Departemen <%= namaDepartemen %></h1>
                 </div>
-                <!-- <div class="row">
-                    <nav class="d-flex align-items-center">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item">
-                                <a href="index.html">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
-                    </nav>
-                </div> -->
             </div>
             <!-- End Page Title -->
 

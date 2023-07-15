@@ -123,7 +123,7 @@
                             <li>
                                 <a
                                     class="dropdown-item d-flex align-items-center"
-                                    href="#"
+                                    href="/signout"
                                 >
                                     <i class="bi bi-box-arrow-right"></i>
                                     <span>Sign Out</span>
@@ -287,7 +287,7 @@
                                 <img
                                     src="../../../<%= result.gambar %>"
                                     alt=""
-                                    id="gambar-soal"
+                                    class="gambar-soal"
                                 />
                                 <% } else { %>
                                 <img
@@ -347,7 +347,7 @@
                         <div class="subjudul-soal">
                             <label>Penulis</label>
                             <span> : </span>
-                            <span>drg. Asyahra Maulidhina Putri Haidir</span>
+                            <span><%= result.pembuat %></span>
                         </div>
                         <div class="action mt-3 mb-3">
                             <button
