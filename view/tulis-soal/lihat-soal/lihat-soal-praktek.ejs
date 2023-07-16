@@ -477,7 +477,7 @@
                                                         >
                                                         <a
                                                             class="dropdown-item"
-                                                            href="#"
+                                                            href="/tulis-soal/hapus-aspek/<%= result.id %>"
                                                             >Hapus Aspek</a
                                                         >
                                                     </div>
@@ -648,49 +648,23 @@
                 const gambar1 = document.getElementById("gambar1").files[0];
                 const gambar2 = document.getElementById("gambar2").files[0];
                 let formData = new FormData();
-                formData.append("gambar1", gambar1);
-                formData.append("gambar2", gambar2);
-                fetch(
-                    "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
-                );
-
-                // if (!gambar1 && !gambar2) {
-                //     alert("Ganti minimal satu gambar");
-                // } else if (!gambar2) {
-                //     formData.append("gambar1", gambar1);
-                //     formData.append("gambar2", null);
-                //     fetch(
-                //         "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
-                //         {
-                //             method: "POST",
-                //             body: formData,
-                //         }
-                //     );
-                // } else if (!gambar1) {
-                //     formData.append("gambar1", null);
-                //     formData.append("gambar2", gambar2);
-                //     fetch(
-                //         "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
-                //         {
-                //             method: "POST",
-                //             body: formData,
-                //         }
-                //     );
-                // } else {
-                //     formData.append("gambar1", gambar1);
-                //     formData.append("gambar2", gambar2);
-                //     fetch(
-                //         "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
-                //         {
-                //             method: "POST",
-                //             body: formData,
-                //         }
-                //     );
-                // }
+                if (!gambar1 && !gambar2) {
+                    alert("ganti minimal satu gambar");
+                } else {
+                    formData.append("gambar1", gambar1);
+                    formData.append("gambar2", gambar2);
+                    fetch(
+                        "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
+                        {
+                            method: "POST",
+                            body: formData,
+                        }
+                    ).then((result) => {
+                        if (result.status == "201") {
+                            location.reload();
+                        }
+                    });
+                }
             });
         </script>
 
