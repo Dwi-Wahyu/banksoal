@@ -295,9 +295,7 @@ praktek.lihatTambahAspek = (req, res) => {
 
 praktek.tambahAspek = (req, res) => {
     const { aspekDinilai, inp0, inp1, inp2, skor0, skor1, skor2 } = req.body;
-    const sql = `INSERT INTO aspek_praktek VALUES ( '${null}',  '${aspekDinilai}', '${
-        req.params.id
-    }', '${skor0}', '${skor1}', '${skor2}', '${inp0}', '${inp1}', '${inp2}')`;
+    const sql = `INSERT INTO aspek_praktek VALUES ('',  '${aspekDinilai}', '${req.params.id}', '${skor0}', '${skor1}', '${skor2}', '${inp0}', '${inp1}', '${inp2}')`;
     con.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
