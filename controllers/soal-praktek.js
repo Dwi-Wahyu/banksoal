@@ -400,29 +400,34 @@ praktek.ubahGambar = (req, res) => {
             return;
         }
 
+        const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
         if (req.files.gambar1 && !req.files.gambar2) {
             const gambar1 = req.files.gambar1[0].path;
             const replaceGambar1 = gambar1.split("\\").join("\\\\");
-            const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
             con.query(sql, (err, result) => {
-                fs.unlink(result[0].gambar1);
+                fs.unlink(result[0].gambar1, (err) => {
+                    if (err) throw err;
+                });
                 con.query(
                     `UPDATE soal_praktek SET gambar1 = '${replaceGambar1}' WHERE id = '${req.params.id}'`,
                     (err, result) => {
-                        console.log(result);
+                        res.statusMessage = "gambar 1 berhasil diubah";
+                        res.status(201).end();
                     }
                 );
             });
         } else if (!req.files.gambar1 && req.files.gambar2) {
             const gambar2 = req.files.gambar2[0].path;
             const replaceGambar2 = gambar2.split("\\").join("\\\\");
-            const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
             con.query(sql, (err, result) => {
-                fs.unlink(result[0].gambar2);
+                fs.unlink(result[0].gambar2, (err) => {
+                    if (err) throw err;
+                });
                 con.query(
                     `UPDATE soal_praktek SET gambar2 = '${replaceGambar2}' WHERE id = '${req.params.id}'`,
                     (err, result) => {
-                        console.log(result);
+                        res.statusMessage = "gambar 1 berhasil diubah";
+                        res.status(201).end();
                     }
                 );
             });
@@ -431,15 +436,19 @@ praktek.ubahGambar = (req, res) => {
             const replaceGambar1 = gambar1.split("\\").join("\\\\");
             const gambar2 = req.files.gambar2[0].path;
             const replaceGambar2 = gambar2.split("\\").join("\\\\");
-            console.log(replaceGambar1, replaceGambar2);
-            const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
             con.query(sql, (err, result) => {
-                fs.unlink(result[0].gambar1);
-                fs.unlink(result[0].gambar2);
+                fs.unlink(result[0].gambar1, (err) => {
+                    if (err) throw err;
+                });
+                fs.unlink(result[0].gambar2, (err) => {
+                    if (err) throw err;
+                });
                 con.query(
-                    `UPDATE soal_praktek SET gambar1 = '${replaceGambar1}', gambar2 = '${replaceGambar2}' WHERE id = '${req.params.id}'`,
+                    `UPDATE soal_praktek set gambar1 = '${replaceGambar1}', gambar2 = '${replaceGambar2}' WHERE id = '${req.params.id}'`,
                     (err, result) => {
-                        console.log(result);
+                        if (err) throw err;
+                        res.statusMessage = "kedua gambar berhasil diubah";
+                        res.status(201).end();
                     }
                 );
             });

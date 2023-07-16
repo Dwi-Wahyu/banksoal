@@ -6,3 +6,4 @@ Yang harus dilakukan
 -   perbaiki alert pada form tulis soal (done)
 -   buat session untuk login agar dapat menyelesaikan logic soal (done)
 -   tambah column baru soal_teori untuk bulan dan tahun soal dibuat (done)
+-   perbaiki reload login

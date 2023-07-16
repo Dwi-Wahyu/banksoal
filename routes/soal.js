@@ -1,17 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const router = express.Router();
-const {
-    TambahSoalTeori,
-    DaftarSoalTeori,
-    LihatSoalTeori,
-    UbahSoalTeori,
-    UbahGambarTeori,
-    UpdateSoalTeori,
-    TambahGambarTeori,
-    HapusGambarTeori,
-} = require("../controllers/soal-teori");
 
+const teori = require("../controllers/soal-teori");
 const praktek = require("../controllers/soal-praktek");
 
 const storageTeori = multer.diskStorage({
@@ -62,15 +53,15 @@ router.get("/daftar-soal-praktek", (req, res) => {
     res.render("tulis-soal/daftar-soal-praktek");
 });
 
-router.get("/daftar-soal-teori/data", DaftarSoalTeori);
+router.get("/daftar-soal-teori/data", teori.daftarSoal);
 
 router.get("/daftar-soal-praktek/data", praktek.daftarSoal);
 
-router.get("/lihat-soal/:id", LihatSoalTeori);
+router.get("/lihat-soal/:id", teori.lihatSoal);
 
 router.get("/lihat-soal-praktek/:id", praktek.lihatSoal);
 
-router.get("/ubah-soal-teori/:id", UbahSoalTeori);
+router.get("/ubah-soal-teori/:id", teori.ubahSoal);
 
 router.get("/ubah-soal-praktek/:id", praktek.ubahSoal);
 
@@ -83,18 +74,18 @@ router.post("/tambah-aspek/:id", praktek.tambahAspek);
 router.post(
     "/lihat-soal/ubah-gambar-teori/:id",
     uploadTeori.single("gambarBaru"),
-    UbahGambarTeori
+    teori.ubahGambar
 );
 
 router.post(
     "/lihat-soal/tambah-gambar-teori/:id",
     uploadTeori.single("gambar"),
-    TambahGambarTeori
+    teori.tambahGambar
 );
 
 router.post("/lihat-soal/ubah-gambar-praktek/:id", praktek.ubahGambar);
 
-router.post("/lihat-soal/ubah-soal-teori/:id", UpdateSoalTeori);
+router.post("/lihat-soal/ubah-soal-teori/:id", teori.updateSoal);
 
 router.post("/lihat-soal/ubah-soal-praktek/:id", praktek.updateSoal);
 
@@ -103,12 +94,12 @@ router.post("/ubah-aspek/:id", praktek.updateAspek);
 router.post(
     "/form-soal-teori/tambah-soal",
     uploadTeori.single("gambar"),
-    TambahSoalTeori
+    teori.tambahSoal
 );
 
 router.post("/form-soal-praktek/tambah-soal", praktek.tambahSoal);
 
-router.delete("/lihat-soal/hapus-gambar-teori/:id", HapusGambarTeori);
+router.delete("/lihat-soal/hapus-gambar-teori/:id", teori.hapusGambar);
 
 router.get("/telaah-soal-teori", (req, res) => {
     res.render("telaah-soal/telaah-soal-teori");

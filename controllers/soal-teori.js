@@ -5,7 +5,7 @@ const con = require("../utils/db").koneksi;
 
 const teori = {};
 
-const daftarSoal = (req, res) => {
+teori.daftarSoal = (req, res) => {
     if (typeof req.query.order == "undefined") {
         var column_name = "nomor";
         var column_sort_order = "desc";
@@ -143,7 +143,7 @@ const daftarSoal = (req, res) => {
     }
 };
 
-const tambahSoal = (req, res) => {
+teori.tambahSoal = (req, res) => {
     const id = randomize(32);
     const {
         tinjauan1,
@@ -192,21 +192,21 @@ const tambahSoal = (req, res) => {
     }
 };
 
-const lihatSoal = (req, res) => {
+teori.lihatSoal = (req, res) => {
     const sql = `SELECT * FROM soal_teori WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         res.render("tulis-soal/lihat-soal/lihat-soal-teori", { data: result });
     });
 };
 
-const ubahSoal = (req, res) => {
+teori.ubahSoal = (req, res) => {
     const sql = `SELECT * FROM soal_teori WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         res.render("tulis-soal/lihat-soal/ubah-soal-teori", { data: result });
     });
 };
 
-const ubahGambar = (req, res) => {
+teori.ubahGambar = (req, res) => {
     const gambarPath = req.file.path;
     const replacedGambarPath = gambarPath.split("\\").join("\\\\");
     const sql = `SELECT gambar FROM soal_teori WHERE id = '${req.params.id}'`;
@@ -223,7 +223,7 @@ const ubahGambar = (req, res) => {
     });
 };
 
-const tambahGambar = (req, res) => {
+teori.tambahGambar = (req, res) => {
     const gambarPath = req.file.path;
     const replacedGambarPath = gambarPath.split("\\").join("\\\\");
     const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
@@ -234,7 +234,7 @@ const tambahGambar = (req, res) => {
     });
 };
 
-const hapusGambar = (req, res) => {
+teori.hapusGambar = (req, res) => {
     const sql = `UPDATE soal_teori SET gambar = '' WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -243,7 +243,7 @@ const hapusGambar = (req, res) => {
     });
 };
 
-const updateSoal = (req, res) => {
+teori.updateSoal = (req, res) => {
     const {
         tinjauan1,
         tinjauan2,
@@ -267,13 +267,4 @@ const updateSoal = (req, res) => {
     });
 };
 
-module.exports = {
-    TambahSoalTeori: tambahSoal,
-    DaftarSoalTeori: daftarSoal,
-    LihatSoalTeori: lihatSoal,
-    UbahSoalTeori: ubahSoal,
-    UbahGambarTeori: ubahGambar,
-    UpdateSoalTeori: updateSoal,
-    TambahGambarTeori: tambahGambar,
-    HapusGambarTeori: hapusGambar,
-};
+module.exports = teori;
