@@ -373,9 +373,19 @@
                             >
                                 Tambah Gambar
                             </button>
+                            <% } %> <% if (result.gambar) { %>
+                            <button
+                                class="btn btn-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#hapus-gambar"
+                            >
+                                Hapus Gambar
+                            </button>
+                            <% } else { %>
+                            <button class="btn btn-danger d-none">
+                                Hapus Gambar
+                            </button>
                             <% } %>
-
-                            <button class="btn btn-danger">Hapus Gambar</button>
                         </div>
                     </div>
                 </div>
@@ -387,7 +397,8 @@
         <div class="modal fade" id="ganti-gambar" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <form id="form">
+                    <% if (result.gambar) { %>
+                    <form id="ganti-gambar">
                         <div class="modal-header">
                             <h5 class="modal-title" style="font-weight: 600">
                                 Ganti Gambar
@@ -429,6 +440,84 @@
                             </button>
                         </div>
                     </form>
+                    <% } else { %>
+                    <form id="tambah-gambar">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="font-weight: 600">
+                                Tambah Gambar
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="gambar">
+                                <div class="input-gambar">
+                                    <input
+                                        type="file"
+                                        name="gambar"
+                                        id="gambar"
+                                        required
+                                        class="input-container mb-2"
+                                    />
+                                    <p>
+                                        <strong> Perhatian: </strong>
+                                        <span id="tambah-msg">
+                                            Gambar Tidak boleh lebih dari 512 KB
+                                            atau 0.5 MB, ukuran dimensi gambar
+                                            maksimal lebar 128 pixel dan tinggi
+                                            128 pixel.
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="ganti-gambar"
+                            >
+                                Tambah Gambar
+                            </button>
+                        </div>
+                    </form>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <!-- End Basic Modal-->
+
+        <!-- modal ganti gambar -->
+        <div class="modal fade" id="hapus-gambar" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-weight: 600">
+                            Hapus Gambar Soal
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="hapus-msg">Yakin menghapus gambar soal?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="submit"
+                            class="btn btn-danger"
+                            id="hapus-gambar"
+                        >
+                            Hapus Gambar Soal
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -457,16 +546,68 @@
         <script src="../../assets/js/main.js"></script>
 
         <script>
-            const form = document.getElementById("form");
+            const ganti = document.getElementById("ganti-gambar");
+            const tambah = document.getElementById("tambah-gambar");
+            const hapus = document.getElementById("hapus-gambar");
+            const hapusmsg = document.getElementById("hapus-msg");
+            const tambahmsg = document.getElementById("tambah-msg");
 
-            form.addEventListener("submit", (e) => {
-                const gambar = document.getElementById("gambar").files[0];
+            if ("<%= result.gambar %>") {
+                ganti.addEventListener("submit", (e) => {
+                    const gambar = document.getElementById("gambar").files[0];
+                    e.preventDefault();
 
-                const formData = new FormData();
-                formData.append("gambarBaru", gambar);
-                fetch("/tulis-soal/lihat-soal/ubah-gambar/<%= result.id %>", {
-                    method: "POST",
-                    body: formData,
+                    const formData = new FormData();
+                    formData.append("gambarBaru", gambar);
+                    fetch(
+                        "/tulis-soal/lihat-soal/ubah-gambar-teori/<%= result.id %>",
+                        {
+                            method: "POST",
+                            body: formData,
+                        }
+                    ).then((result) => {
+                        if (result.statusText == "Gambar telah diubah") {
+                            // tambahmsg.innerHTML =
+                            //     "Gambar telah ditambahkan silahkan refresh halaman ini";
+                            location.reload();
+                        }
+                    });
+                });
+            } else {
+                tambah.addEventListener("submit", (e) => {
+                    const gambar = document.getElementById("gambar").files[0];
+                    e.preventDefault();
+
+                    const formData = new FormData();
+                    formData.append("gambar", gambar);
+                    fetch(
+                        "/tulis-soal/lihat-soal/tambah-gambar-teori/<%= result.id %>",
+                        {
+                            method: "POST",
+                            body: formData,
+                        }
+                    ).then((result) => {
+                        if (result.statusText == "Gambar telah ditambahkan") {
+                            // tambahmsg.innerHTML =
+                            //     "Gambar telah ditambahkan silahkan refresh halaman ini";
+                            location.reload();
+                        }
+                    });
+                });
+            }
+
+            hapus.addEventListener("click", () => {
+                fetch(
+                    "/tulis-soal/lihat-soal/hapus-gambar-teori/<%= result.id %>",
+                    {
+                        method: "DELETE",
+                    }
+                ).then((result) => {
+                    if (result.statusText == "Gambar telah dihapus") {
+                        // hapusmsg.innerHTML =
+                        //     "Gambar telah dihapus silahkan refresh halaman ini";
+                        location.reload();
+                    }
                 });
             });
         </script>

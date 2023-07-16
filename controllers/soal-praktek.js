@@ -1,6 +1,7 @@
 const express = require("express");
 const randomize = require("./random");
 const multer = require("multer");
+const fs = require("fs");
 const con = require("../utils/db").koneksi;
 
 var praktek = {};
@@ -31,6 +32,28 @@ const uploadPraktek = multer({
         }
     },
 }).array("gambar", 2);
+
+const ubahGambar = multer({
+    storage: storagePraktek,
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        if (
+            file.mimetype == "image/png" ||
+            file.mimetype == "image/jpg" ||
+            file.mimetype == "image/jpeg"
+        ) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            const err = new Error("Only .png, .jpg and .jpeg format allowed!");
+            err.name = "ExtensionError";
+            return cb(err);
+        }
+    },
+}).fields([
+    { name: "gambar1", maxCount: 1 },
+    { name: "gambar2", maxCount: 1 },
+]);
 
 praktek.tambahSoal = (req, res) => {
     uploadPraktek(req, res, (err) => {
@@ -345,6 +368,82 @@ praktek.updateAspek = (req, res) => {
     con.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
+    });
+};
+
+praktek.ubahGambar = (req, res) => {
+    ubahGambar(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            res.status(500)
+                .send({
+                    error: {
+                        message: `Multer uploading error: ${err.message}`,
+                    },
+                })
+                .end();
+            return;
+        } else if (err) {
+            if (err.name == "ExtensionError") {
+                res.status(413)
+                    .send({ error: { message: err.message } })
+                    .end();
+            } else {
+                res.status(500)
+                    .send({
+                        error: {
+                            message: `unknown uploading error: ${err.message}`,
+                        },
+                    })
+                    .end();
+            }
+            return;
+        }
+
+        if (req.files.gambar1 && !req.files.gambar2) {
+            const gambar1 = req.files.gambar1[0].path;
+            const replaceGambar1 = gambar1.split("\\").join("\\\\");
+            const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
+            con.query(sql, (err, result) => {
+                fs.unlink(result[0].gambar1);
+                con.query(
+                    `UPDATE soal_praktek SET gambar1 = '${replaceGambar1}' WHERE id = '${req.params.id}'`,
+                    (err, result) => {
+                        console.log(result);
+                    }
+                );
+            });
+        } else if (!req.files.gambar1 && req.files.gambar2) {
+            const gambar2 = req.files.gambar2[0].path;
+            const replaceGambar2 = gambar2.split("\\").join("\\\\");
+            const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
+            con.query(sql, (err, result) => {
+                fs.unlink(result[0].gambar2);
+                con.query(
+                    `UPDATE soal_praktek SET gambar2 = '${replaceGambar2}' WHERE id = '${req.params.id}'`,
+                    (err, result) => {
+                        console.log(result);
+                    }
+                );
+            });
+        } else {
+            const gambar1 = req.files.gambar1[0].path;
+            const replaceGambar1 = gambar1.split("\\").join("\\\\");
+            const gambar2 = req.files.gambar2[0].path;
+            const replaceGambar2 = gambar2.split("\\").join("\\\\");
+            console.log(replaceGambar1, replaceGambar2);
+            const sql = `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`;
+            con.query(sql, (err, result) => {
+                fs.unlink(result[0].gambar1);
+                fs.unlink(result[0].gambar2);
+                con.query(
+                    `UPDATE soal_praktek SET gambar1 = '${replaceGambar1}', gambar2 = '${replaceGambar2}' WHERE id = '${req.params.id}'`,
+                    (err, result) => {
+                        console.log(result);
+                    }
+                );
+            });
+        }
     });
 };
 

@@ -214,12 +214,32 @@ const ubahGambar = (req, res) => {
         fs.unlink(result[0].gambar, (err) => {
             if (err) throw err;
         });
-        console.log(result[0].gambar);
         const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
         con.query(sql, (err, result) => {
             if (err) throw err;
-            console.log(result);
+            res.statusMessage = "Gambar telah diubah";
+            res.status(200).json({ message: "Gambar telah diubah" });
         });
+    });
+};
+
+const tambahGambar = (req, res) => {
+    const gambarPath = req.file.path;
+    const replacedGambarPath = gambarPath.split("\\").join("\\\\");
+    const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.statusMessage = "Gambar telah ditambahkan";
+        res.status(200).json({ message: "Gambar telah diinput" });
+    });
+};
+
+const hapusGambar = (req, res) => {
+    const sql = `UPDATE soal_teori SET gambar = '' WHERE id = '${req.params.id}'`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.statusMessage = "Gambar telah dihapus";
+        res.status(200).json({ message: "Gambar telah dihapus" });
     });
 };
 
@@ -245,7 +265,6 @@ const updateSoal = (req, res) => {
         if (err) throw err;
         console.log(result);
     });
-    console.log(req.params.id);
 };
 
 module.exports = {
@@ -255,4 +274,6 @@ module.exports = {
     UbahSoalTeori: ubahSoal,
     UbahGambarTeori: ubahGambar,
     UpdateSoalTeori: updateSoal,
+    TambahGambarTeori: tambahGambar,
+    HapusGambarTeori: hapusGambar,
 };

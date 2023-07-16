@@ -368,11 +368,13 @@
                                 <img
                                     src="../../../<%= result.gambar1 %>"
                                     class="gambar-soal"
+                                    title="Gambar 1"
                                     alt=""
                                 />
                                 <img
                                     src="../../../<%= result.gambar2 %>"
                                     class="gambar-soal"
+                                    title="Gambar 2"
                                     alt=""
                                 />
                             </div>
@@ -592,28 +594,29 @@
                                         type="file"
                                         name="gambar"
                                         id="gambar1"
-                                        required
                                         class="input-container mb-2"
                                     />
                                     <label
                                         for="gambar2"
-                                        style="font-weight: 550"
+                                        style="
+                                            font-weight: 550;
+                                            margin-top: 8px;
+                                        "
                                         >Gambar 2</label
                                     >
                                     <input
                                         type="file"
                                         name="gambar"
                                         id="gambar2"
-                                        required
                                         class="input-container mb-2"
                                     />
                                     <% } %>
                                 </div>
-                                <p>
+                                <p class="m-1">
                                     <strong> Perhatian: </strong>
-                                    Gambar Tidak boleh lebih dari 512 KB atau
-                                    0.5 MB, ukuran dimensi gambar maksimal lebar
-                                    128 pixel dan tinggi 128 pixel.
+                                    Gambar Tidak boleh lebih dari 1024 KB atau 1
+                                    MB, ukuran dimensi gambar maksimal lebar 128
+                                    pixel dan tinggi 128 pixel.
                                 </p>
                             </div>
                         </div>
@@ -631,13 +634,65 @@
             </div>
         </div>
         <!-- End Basic Modal-->
-        <% } %>
 
         <a
             href="#"
             class="back-to-top d-flex align-items-center justify-content-center"
             ><i class="bi bi-arrow-up-short"></i
         ></a>
+
+        <script>
+            const form = document.getElementById("form");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const gambar1 = document.getElementById("gambar1").files[0];
+                const gambar2 = document.getElementById("gambar2").files[0];
+                let formData = new FormData();
+                formData.append("gambar1", gambar1);
+                formData.append("gambar2", gambar2);
+                fetch(
+                    "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                );
+
+                // if (!gambar1 && !gambar2) {
+                //     alert("Ganti minimal satu gambar");
+                // } else if (!gambar2) {
+                //     formData.append("gambar1", gambar1);
+                //     formData.append("gambar2", null);
+                //     fetch(
+                //         "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
+                //         {
+                //             method: "POST",
+                //             body: formData,
+                //         }
+                //     );
+                // } else if (!gambar1) {
+                //     formData.append("gambar1", null);
+                //     formData.append("gambar2", gambar2);
+                //     fetch(
+                //         "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
+                //         {
+                //             method: "POST",
+                //             body: formData,
+                //         }
+                //     );
+                // } else {
+                //     formData.append("gambar1", gambar1);
+                //     formData.append("gambar2", gambar2);
+                //     fetch(
+                //         "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
+                //         {
+                //             method: "POST",
+                //             body: formData,
+                //         }
+                //     );
+                // }
+            });
+        </script>
 
         <!-- Vendor JS Files -->
         <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -660,5 +715,7 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"
         ></script>
+
+        <% } %>
     </body>
 </html>

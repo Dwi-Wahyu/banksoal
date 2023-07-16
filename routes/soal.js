@@ -8,6 +8,8 @@ const {
     UbahSoalTeori,
     UbahGambarTeori,
     UpdateSoalTeori,
+    TambahGambarTeori,
+    HapusGambarTeori,
 } = require("../controllers/soal-teori");
 
 const praktek = require("../controllers/soal-praktek");
@@ -79,10 +81,18 @@ router.get("/ubah-aspek/:id", praktek.ubahAspek);
 router.post("/tambah-aspek/:id", praktek.tambahAspek);
 
 router.post(
-    "/lihat-soal/ubah-gambar/:id",
+    "/lihat-soal/ubah-gambar-teori/:id",
     uploadTeori.single("gambarBaru"),
     UbahGambarTeori
 );
+
+router.post(
+    "/lihat-soal/tambah-gambar-teori/:id",
+    uploadTeori.single("gambar"),
+    TambahGambarTeori
+);
+
+router.post("/lihat-soal/ubah-gambar-praktek/:id", praktek.ubahGambar);
 
 router.post("/lihat-soal/ubah-soal-teori/:id", UpdateSoalTeori);
 
@@ -97,6 +107,8 @@ router.post(
 );
 
 router.post("/form-soal-praktek/tambah-soal", praktek.tambahSoal);
+
+router.delete("/lihat-soal/hapus-gambar-teori/:id", HapusGambarTeori);
 
 router.get("/telaah-soal-teori", (req, res) => {
     res.render("telaah-soal/telaah-soal-teori");
