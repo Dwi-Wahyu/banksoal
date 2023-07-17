@@ -9,13 +9,11 @@ const tambahPenulis = (req, res) => {
         req.body;
     const hashPassword = bcrypt.hashSync(password, 6);
 
-    console.log(req.body);
     const status = 1;
     const id = randomize(32);
     var sql = `SELECT * FROM PENULIS WHERE email = '${email}'`;
     con.query(sql, (err, data) => {
-        console.log(data);
-        if (data == "") {
+        if (data == undefined) {
             var sql = `INSERT INTO penulis VALUES (null, '${id}', '${departemen}', '${namaDepartemen}','${email}', '${hashPassword}','${firstName}', '${lastName}', '${status}')`;
             con.query(sql, function (err, result, field) {
                 if (err) throw err;
