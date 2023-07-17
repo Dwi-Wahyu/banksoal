@@ -105,7 +105,7 @@ router.post("/form-soal-praktek/tambah-soal", praktek.tambahSoal);
 
 router.delete("/lihat-soal/hapus-gambar-teori/:id", teori.hapusGambar);
 
-router.delete("/hapus-aspek/:id", praktek.hapusAspek);
+router.delete("/hapus-aspek/:idSoal/:idAspek", praktek.hapusAspek);
 
 router.delete("/hapus-gambar-praktek/:id/:gambar", praktek.hapusGambar);
 

@@ -579,13 +579,19 @@ praktek.lihatHapusAspek = (req, res) => {
     res.locals.nama = req.session.nama;
     const idSoal = req.params.id_soal;
     const idAspek = req.params.id_aspek;
-    res.render("tulis-soal/lihat-soal/hapus-aspek", { idSoal, idAspek });
+    res.render("tulis-soal/lihat-soal/hapus-aspek", {
+        idSoal,
+        idAspek,
+    });
 };
 
 praktek.hapusAspek = (req, res) => {
-    const sql = `DELETE FROM aspek_praktek WHERE id = '${req.params.id}'`;
+    const idSoal = req.params.idSoal;
+    const idAspek = req.params.idAspek;
+    const sql = `DELETE FROM aspek_praktek WHERE id = '${idAspek}' AND id_soal = '${idSoal}'`;
     con.query(sql, (err, result) => {
         if (err) throw err;
+        console.log(result);
         res.status(201).end();
     });
 };
