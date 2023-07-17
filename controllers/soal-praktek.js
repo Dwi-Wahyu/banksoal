@@ -32,6 +32,24 @@ const uploadPraktek = multer({
         }
     },
 }).array("gambar", 2);
+const uploadSatuGambar = multer({
+    storage: storagePraktek,
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+        if (
+            file.mimetype == "image/png" ||
+            file.mimetype == "image/jpg" ||
+            file.mimetype == "image/jpeg"
+        ) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            const err = new Error("Only .png, .jpg and .jpeg format allowed!");
+            err.name = "ExtensionError";
+            return cb(err);
+        }
+    },
+}).single("gambar");
 
 const ubahGambar = multer({
     storage: storagePraktek,
@@ -102,14 +120,12 @@ praktek.tambahSoal = (req, res) => {
         } = req.body;
         const pembuat = req.session.nama;
 
-        const gambar1 = req.files[0].path;
-        const replaceGambar1 = gambar1.split("\\").join("\\\\");
-        const gambar2 = req.files[1].path;
-        const replaceGambar2 = gambar2.split("\\").join("\\\\");
         const tanggal = new Date();
         const id = randomize(32);
 
         if (req.files.length == 1) {
+            const gambar1 = req.files[0].path;
+            const replaceGambar1 = gambar1.split("\\").join("\\\\");
             const sql = `INSERT INTO soal_praktek VALUES (NULL, '${id}', '${pembuat}', '${tinjauan1}', '${tinjauan2}', '${subtinjauan2}', '${tinjauan3}', '${tinjauan4}', '${tujuan}', '${skenarioKlinik}', '${tugasKandidat}', '${tugasPenguji}', '${intruksiPasien}', '${peralatan}', '${replaceGambar1}', '', '${departemen}', '${namaDepartemen}', '${referensi}', 'diLokal', '${
                 tanggal.getMonth() + 1
             }', '${tanggal.getFullYear()}')`;
@@ -119,6 +135,10 @@ praktek.tambahSoal = (req, res) => {
                 res.status(200).json({ message: "Berhasil input ke database" });
             });
         } else {
+            const gambar1 = req.files[0].path;
+            const replaceGambar1 = gambar1.split("\\").join("\\\\");
+            const gambar2 = req.files[1].path;
+            const replaceGambar2 = gambar2.split("\\").join("\\\\");
             const sql = `INSERT INTO soal_praktek VALUES (NULL, '${id}', '${pembuat}', '${tinjauan1}', '${tinjauan2}', '${subtinjauan2}', '${tinjauan3}', '${tinjauan4}', '${tujuan}', '${skenarioKlinik}', '${tugasKandidat}', '${tugasPenguji}', '${intruksiPasien}', '${peralatan}', '${replaceGambar1}', '${replaceGambar2}', '${departemen}', '${namaDepartemen}', '${referensi}', 'diLokal', '${
                 tanggal.getMonth() + 1
             }', '${tanggal.getFullYear()}')`;
@@ -455,6 +475,104 @@ praktek.ubahGambar = (req, res) => {
             });
         }
     });
+};
+
+praktek.tambahGambar = (req, res) => {
+    uploadSatuGambar(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            res.status(500)
+                .send({
+                    error: {
+                        message: `Multer uploading error: ${err.message}`,
+                    },
+                })
+                .end();
+            return;
+        } else if (err) {
+            if (err.name == "ExtensionError") {
+                res.status(413)
+                    .send({ error: { message: err.message } })
+                    .end();
+            } else {
+                res.status(500)
+                    .send({
+                        error: {
+                            message: `unknown uploading error: ${err.message}`,
+                        },
+                    })
+                    .end();
+            }
+            return;
+        }
+
+        con.query(
+            `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`,
+            (err, result) => {
+                console.log(result[0].gambar1);
+                console.log(result[0].gambar2);
+                if (result[0].gambar1 == "") {
+                    const gambar1 = req.file.path;
+                    const replaceGambar1 = gambar1.split("\\").join("\\\\");
+                    const sql = `UPDATE soal_praktek SET gambar1 = '${replaceGambar1}' WHERE id = '${req.params.id}'`;
+                    con.query(sql, (err, result) => {
+                        if (err) throw err;
+                        res.statusMessage = "gambar pertama berhasil diubah";
+                        res.status(201).end();
+                    });
+                }
+
+                if (result[0].gambar2 == "") {
+                    const gambar2 = req.file.path;
+                    const replaceGambar2 = gambar2.split("\\").join("\\\\");
+                    const sql = `UPDATE soal_praktek SET gambar2 = '${replaceGambar2}' WHERE id = '${req.params.id}'`;
+                    con.query(sql, (err, result) => {
+                        if (err) throw err;
+                        res.statusMessage = "gambar kedua berhasil diubah";
+                        res.status(201).end();
+                    });
+                }
+            }
+        );
+    });
+};
+
+praktek.hapusGambar = (req, res) => {
+    const gambarDihapus = req.params.gambar;
+
+    if (gambarDihapus == "gambar1") {
+        con.query(
+            `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`,
+            (err, result) => {
+                fs.unlink(result[0].gambar1, (err) => {
+                    if (err) throw err;
+                });
+                con.query(
+                    `UPDATE soal_praktek SET gambar1 = '' WHERE id = '${req.params.id}'`,
+                    (err, result) => {
+                        if (err) throw err;
+                        res.status(201).end();
+                    }
+                );
+            }
+        );
+    } else {
+        con.query(
+            `SELECT * FROM soal_praktek WHERE id = '${req.params.id}'`,
+            (err, result) => {
+                fs.unlink(result[0].gambar2, (err) => {
+                    if (err) throw err;
+                });
+                con.query(
+                    `UPDATE soal_praktek SET gambar2 = '' WHERE id = '${req.params.id}'`,
+                    (err, result) => {
+                        if (err) throw err;
+                        res.status(201).end();
+                    }
+                );
+            }
+        );
+    }
 };
 
 praktek.lihatHapusAspek = (req, res) => {

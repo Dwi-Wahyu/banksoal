@@ -373,7 +373,23 @@
                             >
                                 Ubah Gambar
                             </button>
-                            <!-- <button class="btn btn-danger">Hapus Gambar</button> -->
+                            <% if (!result.gambar1 || !result.gambar2) { %>
+                            <button
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#tambah-gambar"
+                            >
+                                Tambah Gambar
+                            </button>
+                            <% } %> <% if (result.gambar1 && result.gambar2) {%>
+                            <button
+                                class="btn btn-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#hapus-gambar"
+                            >
+                                Hapus Gambar
+                            </button>
+                            <% } %>
                         </div>
                         <span class="judul-btn">Aspek Soal</span>
                         <% if (aspek.length > 0) { %>
@@ -529,7 +545,12 @@
                         <% } %>
                     </div>
                 </div>
-                <!-- <input type="text" value="<%= result.id %>" class="d-none" /> -->
+                <input
+                    type="text"
+                    id="idSoal"
+                    value="<%= result.id %>"
+                    class="d-none"
+                />
             </section>
         </main>
         <!-- End #main -->
@@ -612,42 +633,130 @@
         </div>
         <!-- End Basic Modal-->
 
+        <!-- modal tambah gambar -->
+        <div class="modal fade" id="tambah-gambar" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="tambah-gambar">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="font-weight: 600">
+                                Tambah Gambar
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="gambar">
+                                <div class="input-gambar">
+                                    <input
+                                        type="file"
+                                        name="gambar"
+                                        id="gambar"
+                                        required
+                                        class="input-container mb-2"
+                                    />
+                                </div>
+                                <p class="m-1">
+                                    <strong> Perhatian: </strong>
+                                    Gambar Tidak boleh lebih dari 1024 KB atau 1
+                                    MB, ukuran dimensi gambar maksimal lebar 128
+                                    pixel dan tinggi 128 pixel.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="tambah-gambar"
+                            >
+                                Tambah Gambar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End Basic Modal-->
+
+        <!-- modal tambah gambar -->
+        <div class="modal fade" id="hapus-gambar" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-weight: 600">
+                            Hapus Gambar
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div
+                        class="modal-body d-flex justify-content-around align-items-center"
+                    >
+                        <div
+                            class="gambar1 d-flex flex-column align-items-center"
+                        >
+                            <img
+                                src="../../../<%= result.gambar1 %>"
+                                alt=""
+                                style="max-width: 10rem"
+                            />
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                style="
+                                    width: fit-content;
+                                    margin-top: 1rem !important;
+                                "
+                                id="hapus-gambar1"
+                            >
+                                Hapus Gambar 1
+                            </button>
+                        </div>
+                        <div
+                            class="gambar2 d-flex flex-column align-items-center"
+                        >
+                            <img
+                                src="../../../<%= result.gambar2 %>"
+                                alt=""
+                                style="max-width: 10rem"
+                            />
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                style="
+                                    width: fit-content;
+                                    margin-top: 1rem !important;
+                                "
+                                id="hapus-gambar2"
+                            >
+                                Hapus Gambar 2
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Basic Modal-->
+
         <a
             href="#"
             class="back-to-top d-flex align-items-center justify-content-center"
             ><i class="bi bi-arrow-up-short"></i
         ></a>
 
-        <script>
-            const form = document.getElementById("form");
-            form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const gambar1 = document.getElementById("gambar1").files[0];
-                const gambar2 = document.getElementById("gambar2").files[0];
-                let formData = new FormData();
-                if (!gambar1 && !gambar2) {
-                    alert("ganti minimal satu gambar");
-                } else {
-                    formData.append("gambar1", gambar1);
-                    formData.append("gambar2", gambar2);
-                    fetch(
-                        "/tulis-soal/lihat-soal/ubah-gambar-praktek/<%= result.id %>",
-                        {
-                            method: "POST",
-                            body: formData,
-                        }
-                    ).then((result) => {
-                        if (result.status == "201") {
-                            location.reload();
-                        }
-                    });
-                }
-            });
-        </script>
-
         <!-- Vendor JS Files -->
         <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+        <script src="../../assets/js/soal/praktek/lihat-soal.js"></script>
 
         <!-- Template Main JS File -->
         <script src="../../assets/js/main.js"></script>
