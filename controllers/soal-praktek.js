@@ -457,4 +457,19 @@ praktek.ubahGambar = (req, res) => {
     });
 };
 
+praktek.lihatHapusAspek = (req, res) => {
+    res.locals.nama = req.session.nama;
+    const idSoal = req.params.id_soal;
+    const idAspek = req.params.id_aspek;
+    res.render("tulis-soal/lihat-soal/hapus-aspek", { idSoal, idAspek });
+};
+
+praktek.hapusAspek = (req, res) => {
+    const sql = `DELETE FROM aspek_praktek WHERE id = '${req.params.id}'`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.status(201).end();
+    });
+};
+
 module.exports = praktek;

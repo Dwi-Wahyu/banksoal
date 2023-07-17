@@ -69,6 +69,8 @@ router.get("/tambah-aspek/:id", praktek.lihatTambahAspek);
 
 router.get("/ubah-aspek/:id", praktek.ubahAspek);
 
+router.get("/:id_soal/:id_aspek", praktek.lihatHapusAspek);
+
 router.post("/tambah-aspek/:id", praktek.tambahAspek);
 
 router.post(
@@ -100,6 +102,8 @@ router.post(
 router.post("/form-soal-praktek/tambah-soal", praktek.tambahSoal);
 
 router.delete("/lihat-soal/hapus-gambar-teori/:id", teori.hapusGambar);
+
+router.delete("/hapus-aspek/:id", praktek.hapusAspek);
 
 router.get("/telaah-soal-teori", (req, res) => {
     res.render("telaah-soal/telaah-soal-teori");

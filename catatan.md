@@ -7,3 +7,4 @@ Yang harus dilakukan
 -   buat session untuk login agar dapat menyelesaikan logic soal (done)
 -   tambah column baru soal_teori untuk bulan dan tahun soal dibuat (done)
 -   perbaiki reload login
+-   perbaiki upload 1 gambar soal praktek
