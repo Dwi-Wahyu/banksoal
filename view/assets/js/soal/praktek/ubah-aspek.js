@@ -64,10 +64,11 @@ form.addEventListener("submit", (e) => {
             headers: {
                 "Content-Type": "application/json",
             },
+        }).then((result) => {
+            if (result.status == "201") {
+                location.reload();
+            }
         });
-        popup.style.display = "block";
-        popupFail.style.display = "none";
-        popupSuccess.style.display = "flex";
     }
 });
 
@@ -76,8 +77,15 @@ function disabilityToggle(angka, cbx) {
         $(`#inp-skor${angka}`).prop("disabled", false);
     } else {
         $(`#inp-skor${angka}`).prop("disabled", true);
+        $(`#inp-skor${angka}`).val("");
     }
 }
+
+document.onreadystatechange = () => {
+    disabilityToggle("0", skor0);
+    disabilityToggle("1", skor1);
+    disabilityToggle("2", skor2);
+};
 
 skor0.onclick = () => {
     disabilityToggle("0", skor0);

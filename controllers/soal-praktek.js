@@ -295,7 +295,8 @@ praktek.lihatTambahAspek = (req, res) => {
 
 praktek.tambahAspek = (req, res) => {
     const { aspekDinilai, inp0, inp1, inp2, skor0, skor1, skor2 } = req.body;
-    const sql = `INSERT INTO aspek_praktek VALUES (null,  '${aspekDinilai}', '${req.params.id}', '${skor0}', '${skor1}', '${skor2}', '${inp0}', '${inp1}', '${inp2}')`;
+    const id = randomize(32);
+    const sql = `INSERT INTO aspek_praktek VALUES (null,  '${aspekDinilai}', '${req.params.id}', '${id}', '${skor0}', '${skor1}', '${skor2}', '${inp0}', '${inp1}', '${inp2}')`;
     con.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
@@ -352,7 +353,7 @@ praktek.updateSoal = (req, res) => {
 praktek.ubahAspek = (req, res) => {
     res.locals.nama = req.session.nama;
     res.locals.isAdmin = req.session.isAdmin;
-    const sql = `SELECT * FROM aspek_praktek WHERE id_soal = '${req.params.id}'`;
+    const sql = `SELECT * FROM aspek_praktek WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         if (err) throw err;
         res.render("tulis-soal/lihat-soal/ubah-aspek", { data: result });
@@ -362,10 +363,12 @@ praktek.ubahAspek = (req, res) => {
 praktek.updateAspek = (req, res) => {
     const { aspekDinilai, inp0, inp1, inp2, skor0, skor1, skor2 } = req.body;
 
-    const sql = `UPDATE aspek_praktek SET aspek_dinilai = '${aspekDinilai}', skor0 = '${skor0}', skor1 = '${skor1}', skor2 = '${skor2}', ket_skor0 = '${inp0}', ket_skor1 = '${inp1}', ket_skor2 = '${inp2}' WHERE id_soal = '${req.params.id}'`;
+    const sql = `UPDATE aspek_praktek SET aspek_dinilai = '${aspekDinilai}', skor0 = '${skor0}', skor1 = '${skor1}', skor2 = '${skor2}', ket_skor0 = '${inp0}', ket_skor1 = '${inp1}', ket_skor2 = '${inp2}' WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
+        res.statusMessage = "Berhasil mengubah aspek";
+        res.status(201).end();
     });
 };
 
