@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodyparser = require("body-parser");
 const crypto = require("crypto-js");
@@ -6,21 +8,20 @@ const mysqlStore = require("express-mysql-session")(session);
 const path = require("path");
 const app = express();
 const port = process.env.PORT || 8080;
-// const slugify = require("slugify");
 
+const age = 24 * 60 * 60 * 1000;
 const options = {
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "banksoal",
+    host: process.env.DBHOST,
+    user: process.env.DBUSER,
+    password: process.env.DBPASS,
+    database: process.env.DBNAME,
     port: "3306",
 };
-const age = 24 * 60 * 60 * 1000;
 const sessionStore = new mysqlStore(options);
 app.use(
     session({
-        name: "ini_nama_session",
-        secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+        name: process.env.SESSION_NAME,
+        secret: process.env.SESSION_SECRET,
         saveUninitialized: false,
         cookie: { maxAge: age },
         resave: false,

@@ -1,10 +1,10 @@
 const mysql = require("mysql");
 
 const pool = mysql.createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "banksoal",
+    host: process.env.DBHOST,
+    user: process.env.DBUSER,
+    password: process.env.DBPASS,
+    database: process.env.DBNAME,
     port: "3306",
 });
 
