@@ -16,7 +16,7 @@ const tambahPenulis = (req, res) => {
     con.query(sql, (err, data) => {
         console.log(data);
         if (data == "") {
-            var sql = `INSERT INTO penulis VALUES ('', '${id}', '${departemen}', '${namaDepartemen}','${email}', '${hashPassword}','${firstName}', '${lastName}', '${status}')`;
+            var sql = `INSERT INTO penulis VALUES (null, '${id}', '${departemen}', '${namaDepartemen}','${email}', '${hashPassword}','${firstName}', '${lastName}', '${status}')`;
             con.query(sql, function (err, result, field) {
                 if (err) throw err;
                 res.status(200).json({
