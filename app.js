@@ -54,7 +54,8 @@ const auth = (req, res, next) => {
 };
 
 app.use("/", pages);
-app.use("/penulis", auth, penulisRoute);
+app.use("/penulis", penulisRoute);
+// app.use("/penulis", auth, penulisRoute);
 app.use("/tulis-soal", auth, soalRoute);
 app.use("/telaah-soal", auth, soalRoute);
 

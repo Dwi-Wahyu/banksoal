@@ -1,11 +1,13 @@
 const express = require("express");
 const db = require("../utils/db");
 const randomize = require("./random");
+const bcrypt = require("bcrypt");
 const con = db.koneksi;
 
 const tambahPenulis = (req, res) => {
     const { firstName, lastName, email, password, departemen, namaDepartemen } =
         req.body;
+    const hashPassword = bcrypt.hashSync(password, 6);
 
     console.log(req.body);
     const status = 1;
@@ -14,7 +16,7 @@ const tambahPenulis = (req, res) => {
     con.query(sql, (err, data) => {
         console.log(data);
         if (data == "") {
-            var sql = `INSERT INTO penulis VALUES ('', '${id}', '${departemen}', '${namaDepartemen}','${email}', '${password}', '${firstName}', '${lastName}', '${status}')`;
+            var sql = `INSERT INTO penulis VALUES ('', '${id}', '${departemen}', '${namaDepartemen}','${email}', '${hashPassword}','${firstName}', '${lastName}', '${status}')`;
             con.query(sql, function (err, result, field) {
                 if (err) throw err;
                 res.status(200).json({
