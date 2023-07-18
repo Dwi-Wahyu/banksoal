@@ -4,7 +4,9 @@ const randomize = require("./random");
 const bcrypt = require("bcrypt");
 const con = db.koneksi;
 
-const tambahPenulis = (req, res) => {
+var penulis = {};
+
+penulis.tambahPenulis = (req, res) => {
     const { firstName, lastName, email, password, departemen, namaDepartemen } =
         req.body;
     const hashPassword = bcrypt.hashSync(password, 6);
@@ -13,7 +15,7 @@ const tambahPenulis = (req, res) => {
     const id = randomize(32);
     var sql = `SELECT * FROM PENULIS WHERE email = '${email}'`;
     con.query(sql, (err, data) => {
-        if (data == undefined) {
+        if (data == "") {
             var sql = `INSERT INTO penulis VALUES (null, '${id}', '${departemen}', '${namaDepartemen}','${email}', '${hashPassword}','${firstName}', '${lastName}', '${status}')`;
             con.query(sql, function (err, result, field) {
                 if (err) throw err;
@@ -27,7 +29,7 @@ const tambahPenulis = (req, res) => {
     });
 };
 
-const daftarPenulis = (req, res) => {
+penulis.daftarPenulis = (req, res) => {
     if (typeof req.query.order == "undefined") {
         var column_name = "nomor";
         var column_sort_order = "desc";
@@ -77,7 +79,8 @@ const daftarPenulis = (req, res) => {
     });
 };
 
-const detailPenulis = (req, res) => {
+penulis.detailPenulis = (req, res) => {
+    res.locals.nama = req.session.nama;
     var sql = `SELECT * FROM penulis WHERE id = '${req.params.id}';`;
     con.query(sql, (err, result) => {
         if (err) throw err;
@@ -85,7 +88,7 @@ const detailPenulis = (req, res) => {
     });
 };
 
-const updatePenulis = (req, res) => {
+penulis.updatePenulis = (req, res) => {
     const { firstName, lastName, email, departemen, namaDepartemen } = req.body;
     console.log(departemen);
     console.log(namaDepartemen);
@@ -97,9 +100,4 @@ const updatePenulis = (req, res) => {
     });
 };
 
-module.exports = {
-    tambahPenulis,
-    daftarPenulis,
-    detailPenulis,
-    updatePenulis,
-};
+module.exports = penulis;

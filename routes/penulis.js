@@ -1,32 +1,25 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-    updatePenulis,
-    tambahPenulis,
-    detailPenulis,
-    daftarPenulis,
-} = require("../controllers/penulis");
+const penulis = require("../controllers/penulis");
 
 router.get("/daftar-penulis", (req, res) => {
+    res.locals.nama = req.session.nama;
     res.render("penulis/daftar-penulis", { title: "datatable" });
 });
 
-router.get("/daftar-penulis/data", daftarPenulis);
+router.get("/daftar-penulis/data", penulis.daftarPenulis);
 
 router.get("/tambah-penulis", (req, res) => {
+    res.locals.nama = req.session.nama;
     res.render("penulis/form-tambah-penulis");
 });
 
-router.get("/form-tambah-penulis", (req, res) => {
-    res.render("form-tambah-penulis");
-});
+router.get("/detail-penulis/:id", penulis.detailPenulis);
 
-router.get("/detail-penulis/:id", detailPenulis);
+router.post("/tambah-penulis", penulis.tambahPenulis);
 
-router.post("/tambah-penulis", tambahPenulis);
-
-router.post("/update-penulis/:id", updatePenulis);
+router.post("/update-penulis/:id", penulis.updatePenulis);
 
 router.get("/profil", (req, res) => {
     res.render("penulis/profil");

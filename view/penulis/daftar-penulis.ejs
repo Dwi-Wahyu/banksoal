@@ -98,7 +98,7 @@
                                 class="rounded-circle"
                             />
                             <span class="d-none d-md-block dropdown-toggle ps-2"
-                                >drg. Asyahra Maulidhina Haidir</span
+                                ><%= nama %></span
                             > </a
                         ><!-- End Profile Iamge Icon -->
 
@@ -347,7 +347,9 @@
                         width: "14%",
                         targets: 4,
                         data: null,
-                        defaultContent: `<div class='btn-group'><button type='button' class='btn btn-primary dropdown-toggle p-1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Lihat</button><div class='dropdown-menu menuDropdown'><a class='dropdown-item' id='lihat-detail'>Lihat Detail</a><a class='dropdown-item' href='#'>Ubah Penulis</a>`,
+                        // defaultContent: `<div class='btn-group'><button type='button' class='btn btn-primary dropdown-toggle p-1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Lihat</button><div class='dropdown-menu menuDropdown'><a class='dropdown-item' id='lihat-detail'>Lihat Detail</a><a class='dropdown-item' href='#'>Ubah Penulis</a>`,
+                        defaultContent:
+                            "<a id='lihat-detail' class='btn btn-primary p-1'>Lihat Detail</a>",
                     },
                 ],
             });
