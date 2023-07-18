@@ -56,9 +56,11 @@ const auth = (req, res, next) => {
 
 app.use("/", pages);
 app.use("/penulis", penulisRoute);
+app.use("/tulis-soal", soalRoute);
+app.use("/telaah-soal", soalRoute);
 // app.use("/penulis", auth, penulisRoute);
-app.use("/tulis-soal", auth, soalRoute);
-app.use("/telaah-soal", auth, soalRoute);
+// app.use("/tulis-soal", auth, soalRoute);
+// app.use("/telaah-soal", auth, soalRoute);
 
 app.use(express.static(__dirname + "/view"));
 app.use(express.static(__dirname + "/view/assets"));
