@@ -13,9 +13,10 @@ penulis.tambahPenulis = (req, res) => {
 
     const status = 1;
     const id = randomize(32);
-    var sql = `SELECT * FROM PENULIS WHERE email = '${email}'`;
+    var sql = `SELECT * FROM penulis WHERE email = '${email}'`;
     con.query(sql, (err, data) => {
-        if (typeof data == "undefined") {
+        if (err) throw err;
+        if (data == "") {
             var sql = `INSERT INTO penulis VALUES (null, '${id}', '${departemen}', '${namaDepartemen}','${email}', '${hashPassword}','${firstName}', '${lastName}', '${status}')`;
             con.query(sql, function (err, result, field) {
                 if (err) throw err;
