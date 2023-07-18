@@ -22,12 +22,12 @@ router.get("/", loginAuth, (req, res) => {
     res.render("index");
 });
 
-router.get("/signout", (req, res) => {
+router.get("/signout", auth, (req, res) => {
     req.session.destroy();
     res.redirect("/");
 });
 
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", auth, (req, res) => {
     const nama = req.session.nama;
     if (nama.includes("admin")) {
         res.render("dashboardAdmin", { nama: req.session.nama });
