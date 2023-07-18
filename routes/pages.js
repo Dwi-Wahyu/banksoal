@@ -23,8 +23,10 @@ router.get("/", loginAuth, (req, res) => {
 });
 
 router.get("/signout", auth, (req, res) => {
-    req.session.destroy();
-    res.redirect("/");
+    req.session.destroy((err) => {
+        if (err) throw err;
+        res.redirect("/");
+    });
 });
 
 router.get("/dashboard", auth, (req, res) => {

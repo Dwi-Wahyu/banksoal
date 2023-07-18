@@ -9,7 +9,7 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 8080;
 
-const age = 24 * 60 * 60 * 1000;
+const age = 1 * 60 * 60 * 1000;
 const options = {
     host: process.env.DBHOST,
     user: process.env.DBUSER,
