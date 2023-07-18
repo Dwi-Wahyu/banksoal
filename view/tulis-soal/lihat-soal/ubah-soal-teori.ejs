@@ -115,7 +115,7 @@
                                 class="rounded-circle"
                             />
                             <span class="d-none d-md-block dropdown-toggle ps-2"
-                                >drg. Asyahra Maulidhina Haidir</span
+                                ><%= nama %></span
                             > </a
                         ><!-- End Profile Iamge Icon -->
 
@@ -784,7 +784,7 @@
                                     name="Penulis"
                                     class="form-control"
                                     id="Penulis"
-                                    value="drg Asyahra Maulidhina Haidir"
+                                    value="<%= result.pembuat %>"
                                     disabled
                                 />
                             </div>
@@ -804,10 +804,17 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-1">
                                 <button class="btn btn-primary mt-3">
                                     Simpan
                                 </button>
+                            </div>
+                            <div class="col-1">
+                                <a
+                                    class="btn btn-primary mt-3"
+                                    href="/tulis-soal/lihat-soal-teori/<%= result.id %>"
+                                    >Kembali
+                                </a>
                             </div>
                         </div>
 

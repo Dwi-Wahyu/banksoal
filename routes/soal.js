@@ -57,7 +57,7 @@ router.get("/daftar-soal-teori/data", teori.daftarSoal);
 
 router.get("/daftar-soal-praktek/data", praktek.daftarSoal);
 
-router.get("/lihat-soal/:id", teori.lihatSoal);
+router.get("/lihat-soal-teori/:id", teori.lihatSoal);
 
 router.get("/lihat-soal-praktek/:id", praktek.lihatSoal);
 

@@ -193,6 +193,7 @@ teori.tambahSoal = (req, res) => {
 };
 
 teori.lihatSoal = (req, res) => {
+    res.locals.nama = req.session.nama;
     const sql = `SELECT * FROM soal_teori WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         res.render("tulis-soal/lihat-soal/lihat-soal-teori", { data: result });
@@ -200,6 +201,7 @@ teori.lihatSoal = (req, res) => {
 };
 
 teori.ubahSoal = (req, res) => {
+    res.locals.nama = req.session.nama;
     const sql = `SELECT * FROM soal_teori WHERE id = '${req.params.id}'`;
     con.query(sql, (err, result) => {
         res.render("tulis-soal/lihat-soal/ubah-soal-teori", { data: result });
