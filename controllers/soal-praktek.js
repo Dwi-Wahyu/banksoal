@@ -373,10 +373,13 @@ praktek.updateSoal = (req, res) => {
 praktek.ubahAspek = (req, res) => {
     res.locals.nama = req.session.nama;
     res.locals.isAdmin = req.session.isAdmin;
-    const sql = `SELECT * FROM aspek_praktek WHERE id = '${req.params.id}'`;
+    const sql = `SELECT * FROM aspek_praktek WHERE id = '${req.params.idAspek}'`;
     con.query(sql, (err, result) => {
         if (err) throw err;
-        res.render("tulis-soal/lihat-soal/ubah-aspek", { data: result });
+        res.render("tulis-soal/lihat-soal/ubah-aspek", {
+            data: result,
+            idSoal: req.params.idSoal,
+        });
     });
 };
 

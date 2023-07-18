@@ -67,7 +67,7 @@ router.get("/ubah-soal-praktek/:id", praktek.ubahSoal);
 
 router.get("/tambah-aspek/:id", praktek.lihatTambahAspek);
 
-router.get("/ubah-aspek/:id", praktek.ubahAspek);
+router.get("/ubah-aspek/:idSoal/:idAspek", praktek.ubahAspek);
 
 router.get("/:id_soal/:id_aspek", praktek.lihatHapusAspek);
 

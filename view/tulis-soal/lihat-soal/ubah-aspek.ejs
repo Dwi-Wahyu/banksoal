@@ -9,9 +9,9 @@
         <meta content="" name="keywords" />
 
         <!-- Favicons -->
-        <link href="../../assets/img/favicon.png" rel="icon" />
+        <link href="../../../view/assets/img/favicon.png" rel="icon" />
         <link
-            href="../../assets/img/apple-touch-icon.png"
+            href="../../../view/assets/img/apple-touch-icon.png"
             rel="apple-touch-icon"
         />
 
@@ -32,40 +32,40 @@
 
         <!-- Vendor CSS Files -->
         <link
-            href="../../assets/vendor/bootstrap/css/bootstrap.min.css"
+            href="../../../view/assets/vendor/bootstrap/css/bootstrap.min.css"
             rel="stylesheet"
         />
         <link
-            href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+            href="../../../view/assets/vendor/bootstrap-icons/bootstrap-icons.css"
             rel="stylesheet"
         />
         <link
-            href="../../assets/vendor/boxicons/css/boxicons.min.css"
+            href="../../../view/assets/vendor/boxicons/css/boxicons.min.css"
             rel="stylesheet"
         />
         <link
-            href="../../assets/vendor/quill/quill.snow.css"
+            href="../../../view/assets/vendor/quill/quill.snow.css"
             rel="stylesheet"
         />
         <link
-            href="../../assets/vendor/quill/quill.bubble.css"
+            href="../../../view/assets/vendor/quill/quill.bubble.css"
             rel="stylesheet"
         />
         <link
-            href="../../assets/vendor/remixicon/remixicon.css"
+            href="../../../view/assets/vendor/remixicon/remixicon.css"
             rel="stylesheet"
         />
         <link
-            href="../../assets/vendor/simple-datatables/style.css"
+            href="../../../view/assets/vendor/simple-datatables/style.css"
             rel="stylesheet"
         />
 
         <!-- Template Main CSS File -->
-        <link href="../../assets/css/style.css" rel="stylesheet" />
-        <link rel="stylesheet" href="../../assets/css/template.css" />
-        <link rel="stylesheet" href="../../assets/css/lihat-soal.css" />
-        <link rel="stylesheet" href="../../assets/css/buat-soal.css" />
-        <link rel="stylesheet" href="../../assets/css/aspek.css" />
+        <link href="../../../view/assets/css/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../../../view/assets/css/template.css" />
+        <link rel="stylesheet" href="../../../view/assets/css/lihat-soal.css" />
+        <link rel="stylesheet" href="../../../view/assets/css/buat-soal.css" />
+        <link rel="stylesheet" href="../../../view/assets/css/aspek.css" />
     </head>
 
     <body>
@@ -131,7 +131,7 @@
                     class="logo d-flex align-items-center"
                     style="width: 100%"
                 >
-                    <img src="../../assets/img/Logo-unhas.png" alt="" />
+                    <img src="../../../view/assets/img/Logo-unhas.png" alt="" />
                     <span class="d-none d-lg-block">BANKSOAL FKG-UNHAS</span>
                 </a>
             </div>
@@ -146,7 +146,7 @@
                             data-bs-toggle="dropdown"
                         >
                             <img
-                                src="../../assets/img/messages-2.jpg"
+                                src="../../../view/assets/img/messages-2.jpg"
                                 alt="Profile"
                                 class="rounded-circle"
                             />
@@ -514,6 +514,12 @@
 
                             <div class="action-tambah">
                                 <button class="btn btn-primary">Simpan</button>
+                                <a
+                                    class="btn btn-primary"
+                                    href="/tulis-soal/lihat-soal-praktek/<%= idSoal %>"
+                                >
+                                    Selesai
+                                </a>
                             </div>
                             <input
                                 type="text"
@@ -535,17 +541,18 @@
         ></a>
 
         <!-- jquery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="../../../view/assets/vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.6.4_jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
 
         <!-- Vendor JS Files -->
-        <script src="../../assets/vendor/apexcharts/apexcharts.min.js"></script>
-        <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../../assets/vendor/chart.js/chart.umd.js"></script>
-        <script src="../../assets/vendor/tinymce/tinymce.min.js"></script>
+        <script src="../../../view/assets/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="../../../view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../../../view/assets/vendor/chart.js/chart.umd.js"></script>
 
         <!-- Template Main JS File -->
-        <script src="../../assets/js/main.js"></script>
-        <script src="../../assets/js/soal/praktek/ubah-aspek.js"></script>
+        <script src="../../../view/assets/js/main.js"></script>
+        <script src="../../../view/assets/js/soal/praktek/ubah-aspek.js"></script>
 
         <!-- Bootstrap -->
         <script
@@ -567,6 +574,7 @@
         <script>
             tinymce.init({
                 selector: "textarea.editor",
+                height: 250,
             });
         </script>
 
