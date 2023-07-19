@@ -29,15 +29,20 @@ router.get("/signout", auth, (req, res) => {
     });
 });
 
-router.get("/dashboard", auth, (req, res) => {
+router.get("/dashboard", (req, res) => {
     const nama = req.session.nama;
-    if (nama.includes("admin")) {
-        res.render("dashboardAdmin", { nama: req.session.nama });
+    res.locals.isAuthenticated = req.session.isAuthenticated;
+    if (req.session.isAuthenticated) {
+        if (nama.includes("admin")) {
+            res.render("dashboardAdmin", { nama: req.session.nama });
+        } else {
+            res.render("dashboardPenulis", {
+                nama: req.session.nama,
+                namaDepartemen: req.session.namaDepartemen,
+            });
+        }
     } else {
-        res.render("dashboardPenulis", {
-            nama: req.session.nama,
-            namaDepartemen: req.session.namaDepartemen,
-        });
+        res.render("dashboardAdmin");
     }
 });
 

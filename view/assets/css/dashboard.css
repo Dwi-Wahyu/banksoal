@@ -55,3 +55,23 @@
     margin-bottom: 0;
     text-align: center;
 }
+
+.warning {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.warning h1 {
+    color: black;
+    font-weight: 550;
+    margin: 0;
+}
+
+.warning i {
+    font-size: 5rem;
+    color: red;
+}
