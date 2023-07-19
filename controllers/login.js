@@ -18,15 +18,15 @@ const login = async (req, res) => {
                 req.session.isAuthenticated = true;
                 if (result[0].email.includes("admin")) {
                     req.session.isAdmin = true;
-                    if (req.session.isAuthenticated) {
+                    req.session.save(() => {
                         res.status(201).json({ message: "Berhasil login" });
-                    }
+                    });
                     console.log("berhasil login admin");
                 } else {
                     req.session.isAdmin = false;
-                    if (req.session.isAuthenticated) {
+                    req.session.save(() => {
                         res.status(201).json({ message: "Berhasil login" });
-                    }
+                    });
                     console.log("berhasil login penulis");
                 }
             } else {
