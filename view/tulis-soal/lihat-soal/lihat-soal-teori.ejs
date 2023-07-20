@@ -402,10 +402,12 @@
                                     />
                                     <p>
                                         <strong> Perhatian: </strong>
-                                        Gambar Tidak boleh lebih dari 512 KB
-                                        atau 0.5 MB, ukuran dimensi gambar
-                                        maksimal lebar 128 pixel dan tinggi 128
-                                        pixel.
+                                        <span id="ubah-msg">
+                                            Gambar Tidak boleh lebih dari 512 KB
+                                            atau 0.5 MB, ukuran dimensi gambar
+                                            maksimal lebar 128 pixel dan tinggi
+                                            128 pixel.
+                                        </span>
                                     </p>
                                 </div>
                             </div>
@@ -530,6 +532,7 @@
             const tambah = document.getElementById("tambah-gambar");
             const hapus = document.getElementById("hapus-gambar");
             const hapusmsg = document.getElementById("hapus-msg");
+            const ubahmsg = document.getElementById("ubah-msg");
             const tambahmsg = document.getElementById("tambah-msg");
 
             if ("<%= result.gambar %>") {
@@ -538,7 +541,7 @@
                     e.preventDefault();
 
                     const formData = new FormData();
-                    formData.append("gambarBaru", gambar);
+                    formData.append("gambar", gambar);
                     fetch(
                         "/tulis-soal/lihat-soal/ubah-gambar-teori/<%= result.id %>",
                         {
@@ -546,9 +549,10 @@
                             body: formData,
                         }
                     ).then((result) => {
-                        if (result.statusText == "Gambar telah diubah") {
-                            // tambahmsg.innerHTML =
-                            //     "Gambar telah ditambahkan silahkan refresh halaman ini";
+                        if (result.statusText == "Payload Too Large") {
+                            ubahmsg.textContent =
+                                "Format gambar yang diperbolehkan yaitu .png .jpg dan .jpeg";
+                        } else if (result.statusText == "Gambar telah diubah") {
                             location.reload();
                         }
                     });
@@ -567,9 +571,12 @@
                             body: formData,
                         }
                     ).then((result) => {
-                        if (result.statusText == "Gambar telah ditambahkan") {
-                            // tambahmsg.innerHTML =
-                            //     "Gambar telah ditambahkan silahkan refresh halaman ini";
+                        if (result.statusText == "Payload Too Large") {
+                            tambahmsg.textContent =
+                                "Format gambar yang diperbolehkan yaitu .png .jpg dan .jpeg";
+                        } else if (
+                            result.statusText == "Gambar telah ditambahkan"
+                        ) {
                             location.reload();
                         }
                     });

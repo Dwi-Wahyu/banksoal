@@ -1,0 +1,22 @@
+p {
+    margin-bottom: 0.5rem;
+}
+
+i {
+    margin-right: 0.3rem;
+}
+
+#downloadbtn {
+    width: 14rem;
+    background-color: rgb(13, 110, 253);
+    border: solid rgb(13, 110, 253) thin;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem;
+    transition: 0.3s;
+}
+
+#downloadbtn:hover {
+    background-color: white;
+    color: rgb(10, 90, 207);
+}

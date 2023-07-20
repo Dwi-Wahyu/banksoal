@@ -63,9 +63,6 @@ form.addEventListener("submit", (e) => {
         msg.innerHTML = err;
         $("#pesan-error").show();
     } else {
-        $("#pesan-error").hide();
-        popup.style.display = "block";
-        popupSuccess.style.display = "flex";
         let formData = new FormData();
         formData.append("tinjauan1", tinjauan1);
         formData.append("tinjauan2", tinjauan2);
@@ -87,6 +84,16 @@ form.addEventListener("submit", (e) => {
         fetch("/tulis-soal/form-soal-teori/tambah-soal", {
             method: "POST",
             body: formData,
+        }).then((result) => {
+            if (result.statusText == "Payload Too Large") {
+                msg.innerHTML =
+                    "Gambar yang diperbolehkan yaitu png jpg dan jpeg";
+                $("#pesan-error").show();
+            } else {
+                $("#pesan-error").hide();
+                popup.style.display = "block";
+                popupSuccess.style.display = "flex";
+            }
         });
     }
 });

@@ -84,7 +84,7 @@ form.addEventListener("submit", (e) => {
         }).then((result) => {
             if (result.statusText == "Payload Too Large") {
                 msg.innerHTML =
-                    "Format gambar yang diperbolehkan yaitu png jpg dan jpeg";
+                    "Gambar yang diperbolehkan yaitu png jpg dan jpeg";
                 $("#pesan-error").show();
             } else if (result.status == 500) {
                 msg.innerHTML = "Maaf maksimal upload dua gambar";

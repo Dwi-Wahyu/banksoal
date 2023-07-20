@@ -4,6 +4,7 @@ const router = express.Router();
 
 const teori = require("../controllers/soal-teori");
 const praktek = require("../controllers/soal-praktek");
+const path = require("path");
 
 const storageTeori = multer.diskStorage({
     destination: (req, res, cb) => {
@@ -53,6 +54,12 @@ router.get("/daftar-soal-praktek", (req, res) => {
     res.render("tulis-soal/daftar-soal-praktek");
 });
 
+router.get("/export-soal-teori", (req, res) => {
+    res.locals.isAdmin = req.session.isAdmin;
+    res.locals.nama = req.session.nama;
+    res.render("tulis-soal/export-soal-teori");
+});
+
 router.get("/daftar-soal-teori/data", teori.daftarSoal);
 
 router.get("/daftar-soal-praktek/data", praktek.daftarSoal);
@@ -71,19 +78,17 @@ router.get("/ubah-aspek/:idSoal/:idAspek", praktek.ubahAspek);
 
 router.get("/:id_soal/:id_aspek", praktek.lihatHapusAspek);
 
+router.get("/get-template-teori", (req, res) => {
+    res.download("teori.csv", { root: path.join(__dirname) }, (err) => {
+        if (err) throw err;
+    });
+});
+
 router.post("/tambah-aspek/:id", praktek.tambahAspek);
 
-router.post(
-    "/lihat-soal/ubah-gambar-teori/:id",
-    uploadTeori.single("gambarBaru"),
-    teori.ubahGambar
-);
+router.post("/lihat-soal/ubah-gambar-teori/:id", teori.ubahGambar);
 
-router.post(
-    "/lihat-soal/tambah-gambar-teori/:id",
-    uploadTeori.single("gambar"),
-    teori.tambahGambar
-);
+router.post("/lihat-soal/tambah-gambar-teori/:id", teori.tambahGambar);
 
 router.post("/lihat-soal/ubah-gambar-praktek/:id", praktek.ubahGambar);
 
@@ -95,11 +100,7 @@ router.post("/lihat-soal/ubah-soal-praktek/:id", praktek.updateSoal);
 
 router.post("/ubah-aspek/:id", praktek.updateAspek);
 
-router.post(
-    "/form-soal-teori/tambah-soal",
-    uploadTeori.single("gambar"),
-    teori.tambahSoal
-);
+router.post("/form-soal-teori/tambah-soal", teori.tambahSoal);
 
 router.post("/form-soal-praktek/tambah-soal", praktek.tambahSoal);
 

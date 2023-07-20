@@ -1,9 +1,36 @@
 const express = require("express");
 const randomize = require("./random");
+const multer = require("multer");
 const fs = require("fs");
 const con = require("../utils/db").koneksi;
 
 const teori = {};
+
+const storageTeori = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "images/soal-teori");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "_" + file.originalname);
+    },
+});
+const uploadTeori = multer({
+    storage: storageTeori,
+    fileFilter: (req, file, cb) => {
+        if (
+            file.mimetype == "image/png" ||
+            file.mimetype == "image/jpg" ||
+            file.mimetype == "image/jpeg"
+        ) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            const err = new Error("Only .png, .jpg and .jpeg format allowed!");
+            err.name = "ExtensionError";
+            return cb(err);
+        }
+    },
+}).single("gambar");
 
 teori.daftarSoal = (req, res) => {
     if (typeof req.query.order == "undefined") {
@@ -144,52 +171,81 @@ teori.daftarSoal = (req, res) => {
 };
 
 teori.tambahSoal = (req, res) => {
-    const id = randomize(32);
-    const {
-        tinjauan1,
-        tinjauan2,
-        tinjauan3,
-        kunci,
-        departemen,
-        namaDepartemen,
-        jawabanA,
-        jawabanB,
-        jawabanC,
-        jawabanD,
-        jawabanE,
-        alasan,
-        referensi,
-        vignette,
-        pertanyaan,
-    } = req.body;
+    uploadTeori(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            res.status(500)
+                .send({
+                    error: {
+                        message: `Multer uploading error: ${err.message}`,
+                    },
+                })
+                .end();
+            return;
+        } else if (err) {
+            if (err.name == "ExtensionError") {
+                res.status(413)
+                    .send({ error: { message: err.message } })
+                    .end();
+            } else {
+                res.status(500)
+                    .send({
+                        error: {
+                            message: `unknown uploading error: ${err.message}`,
+                        },
+                    })
+                    .end();
+            }
+            return;
+        }
 
-    const tanggal = new Date();
+        const id = randomize(32);
+        const {
+            tinjauan1,
+            tinjauan2,
+            tinjauan3,
+            kunci,
+            departemen,
+            namaDepartemen,
+            jawabanA,
+            jawabanB,
+            jawabanC,
+            jawabanD,
+            jawabanE,
+            alasan,
+            referensi,
+            vignette,
+            pertanyaan,
+        } = req.body;
 
-    if (req.file == undefined) {
-        res.status(200).json({ message: "tidak ada gambar" });
-        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
-            req.session.nama
-        }', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
-            tanggal.getMonth() + 1
-        }, ${tanggal.getFullYear()})`;
-        con.query(sql, (err, result) => {
-            if (err) throw err;
-            console.log(result);
-        });
-    } else {
-        res.status(200).json({ message: "ada gambar" });
-        const gambarPath = req.file.path;
-        const replacedGambarPath = gambarPath.split("\\").join("\\\\");
-        const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
-            req.session.nama
-        }','${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '${replacedGambarPath}', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
-            tanggal.getMonth() + 1
-        }, ${tanggal.getFullYear()})`;
-        con.query(sql, (err, result) => {
-            if (err) throw err;
-            console.log(result);
-        });
-    }
+        const tanggal = new Date();
+
+        if (req.file == undefined) {
+            res.status(200).json({ message: "tidak ada gambar" });
+            const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
+                req.session.nama
+            }', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
+                tanggal.getMonth() + 1
+            }, ${tanggal.getFullYear()})`;
+            con.query(sql, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+        } else {
+            res.status(200).json({ message: "ada gambar" });
+            const gambarPath = req.file.path;
+            const replacedGambarPath = gambarPath.split("\\").join("\\\\");
+            const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
+                req.session.nama
+            }','${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '${replacedGambarPath}', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
+                tanggal.getMonth() + 1
+            }, ${tanggal.getFullYear()})`;
+            con.query(sql, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+        }
+    });
 };
 
 teori.lihatSoal = (req, res) => {
@@ -209,30 +265,88 @@ teori.ubahSoal = (req, res) => {
 };
 
 teori.ubahGambar = (req, res) => {
-    const gambarPath = req.file.path;
-    const replacedGambarPath = gambarPath.split("\\").join("\\\\");
-    const sql = `SELECT gambar FROM soal_teori WHERE id = '${req.params.id}'`;
-    con.query(sql, (err, result) => {
-        fs.unlink(result[0].gambar, (err) => {
-            if (err) throw err;
-        });
-        const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
+    uploadTeori(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            res.status(500)
+                .send({
+                    error: {
+                        message: `Multer uploading error: ${err.message}`,
+                    },
+                })
+                .end();
+            return;
+        } else if (err) {
+            if (err.name == "ExtensionError") {
+                res.status(413)
+                    .send({ error: { message: err.message } })
+                    .end();
+            } else {
+                res.status(500)
+                    .send({
+                        error: {
+                            message: `unknown uploading error: ${err.message}`,
+                        },
+                    })
+                    .end();
+            }
+            return;
+        }
+
+        const gambarPath = req.file.path;
+        const replacedGambarPath = gambarPath.split("\\").join("\\\\");
+        const sql = `SELECT gambar FROM soal_teori WHERE id = '${req.params.id}'`;
         con.query(sql, (err, result) => {
-            if (err) throw err;
-            res.statusMessage = "Gambar telah diubah";
-            res.status(200).json({ message: "Gambar telah diubah" });
+            fs.unlink(result[0].gambar, (err) => {
+                if (err) throw err;
+            });
+            const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
+            con.query(sql, (err, result) => {
+                if (err) throw err;
+                res.statusMessage = "Gambar telah diubah";
+                res.status(200).json({ message: "Gambar telah diubah" });
+            });
         });
     });
 };
 
 teori.tambahGambar = (req, res) => {
-    const gambarPath = req.file.path;
-    const replacedGambarPath = gambarPath.split("\\").join("\\\\");
-    const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
-    con.query(sql, (err, result) => {
-        if (err) throw err;
-        res.statusMessage = "Gambar telah ditambahkan";
-        res.status(200).json({ message: "Gambar telah diinput" });
+    uploadTeori(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            // A Multer error occurred when uploading.
+            res.status(500)
+                .send({
+                    error: {
+                        message: `Multer uploading error: ${err.message}`,
+                    },
+                })
+                .end();
+            return;
+        } else if (err) {
+            if (err.name == "ExtensionError") {
+                res.status(413)
+                    .send({ error: { message: err.message } })
+                    .end();
+            } else {
+                res.status(500)
+                    .send({
+                        error: {
+                            message: `unknown uploading error: ${err.message}`,
+                        },
+                    })
+                    .end();
+            }
+            return;
+        }
+
+        const gambarPath = req.file.path;
+        const replacedGambarPath = gambarPath.split("\\").join("\\\\");
+        const sql = `UPDATE soal_teori SET gambar = '${replacedGambarPath}' WHERE id = '${req.params.id}'`;
+        con.query(sql, (err, result) => {
+            if (err) throw err;
+            res.statusMessage = "Gambar telah ditambahkan";
+            res.status(200).json({ message: "Gambar telah diinput" });
+        });
     });
 };
 
