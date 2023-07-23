@@ -221,7 +221,6 @@ teori.tambahSoal = (req, res) => {
         const tanggal = new Date();
 
         if (req.file == undefined) {
-            res.status(200).json({ message: "tidak ada gambar" });
             const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
                 req.session.nama
             }', '${tinjauan1}', '${tinjauan2}', '${tinjauan3}', '${vignette}', '${pertanyaan}', '', '${jawabanA}', '${jawabanB}', '${jawabanC}', '${jawabanD}', '${jawabanE}', '${kunci}', '${departemen}', '${namaDepartemen}','${alasan}', '${referensi}', 'di Lokal', ${
@@ -230,9 +229,10 @@ teori.tambahSoal = (req, res) => {
             con.query(sql, (err, result) => {
                 if (err) throw err;
                 console.log(result);
+                res.statusMessage = "Berhasil input soal";
+                res.status(200).end();
             });
         } else {
-            res.status(200).json({ message: "ada gambar" });
             const gambarPath = req.file.path;
             const replacedGambarPath = gambarPath.split("\\").join("\\\\");
             const sql = `INSERT INTO soal_teori VALUES (NULL, '${id}', '${
@@ -243,6 +243,8 @@ teori.tambahSoal = (req, res) => {
             con.query(sql, (err, result) => {
                 if (err) throw err;
                 console.log(result);
+                res.statusMessage = "Berhasil input soal";
+                res.status(200).end();
             });
         }
     });

@@ -132,6 +132,7 @@ praktek.tambahSoal = (req, res) => {
             con.query(sql, (err, result) => {
                 if (err) throw err;
                 console.log(result);
+                res.statusMessage = "Berhasil input ke database";
                 res.status(200).json({ message: "Berhasil input ke database" });
             });
         } else {
@@ -145,6 +146,7 @@ praktek.tambahSoal = (req, res) => {
             con.query(sql, (err, result) => {
                 if (err) throw err;
                 console.log(result);
+                res.statusMessage = "Berhasil input ke database";
                 res.status(200).json({ message: "Berhasil input ke database" });
             });
         }
@@ -320,6 +322,8 @@ praktek.tambahAspek = (req, res) => {
     con.query(sql, (err, result) => {
         if (err) throw err;
         console.log(result);
+        res.statusMessage = "Berhasil tambah aspek";
+        res.status(200).end();
     });
 };
 

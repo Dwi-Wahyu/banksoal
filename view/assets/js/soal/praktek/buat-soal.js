@@ -90,9 +90,10 @@ form.addEventListener("submit", (e) => {
                 msg.innerHTML = "Maaf maksimal upload dua gambar";
                 $("#pesan-error").show();
             } else {
-                $("#pesan-error").hide();
-                popup.style.display = "block";
-                popupSuccess.style.display = "flex";
+                // $("#pesan-error").hide();
+                // popup.style.display = "block";
+                // popupSuccess.style.display = "flex";
+                location.reload();
             }
         });
     }

@@ -60,10 +60,11 @@ form.addEventListener("submit", (e) => {
             headers: {
                 "Content-Type": "application/json",
             },
+        }).then((result) => {
+            if (result.statusText == "Berhasil tambah aspek") {
+                location.reload();
+            }
         });
-        popup.style.display = "block";
-        popupFail.style.display = "none";
-        popupSuccess.style.display = "flex";
     }
 });
 

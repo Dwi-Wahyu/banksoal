@@ -90,9 +90,10 @@ form.addEventListener("submit", (e) => {
                     "Gambar yang diperbolehkan yaitu png jpg dan jpeg";
                 $("#pesan-error").show();
             } else {
-                $("#pesan-error").hide();
-                popup.style.display = "block";
-                popupSuccess.style.display = "flex";
+                location.reload();
+                // $("#pesan-error").hide();
+                // popup.style.display = "block";
+                // popupSuccess.style.display = "flex";
             }
         });
     }
