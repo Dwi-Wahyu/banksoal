@@ -62,9 +62,9 @@ form.addEventListener("submit", (e) => {
         msg.innerHTML = err;
         $("#pesan-error").show();
     } else {
-        $("#pesan-error").hide();
-        popup.style.display = "block";
-        popupSuccess.style.display = "flex";
+        // $("#pesan-error").hide();
+        // popup.style.display = "block";
+        // popupSuccess.style.display = "flex";
         const data = {
             tinjauan1,
             tinjauan2,
@@ -88,6 +88,10 @@ form.addEventListener("submit", (e) => {
             headers: {
                 "Content-Type": "application/json",
             },
+        }).then((result) => {
+            if (result.statusText == "Berhasil update soal") {
+                location.reload();
+            }
         });
     }
 });

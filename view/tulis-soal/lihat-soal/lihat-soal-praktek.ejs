@@ -410,14 +410,14 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <% for (const item of aspek) { %>
+                                <% for (const [i, item] of aspek.entries()) { %>
                                 <tbody>
                                     <tr>
                                         <th
                                             scope="row"
                                             style="text-align: center"
                                         >
-                                            1
+                                            <%= i + 1 %>
                                         </th>
                                         <td><%- item.aspek_dinilai %></td>
                                         <% if (item.skor0 == 1) { %>

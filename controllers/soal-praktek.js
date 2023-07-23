@@ -362,6 +362,7 @@ praktek.updateSoal = (req, res) => {
         con.query(sql, (err, result) => {
             if (err) throw err;
             console.log(result);
+            res.statusMessage = "Berhasil update soal";
             res.status(200).json({ message: "Berhasil mengubah soal praktek" });
         });
     } else {
@@ -369,6 +370,7 @@ praktek.updateSoal = (req, res) => {
         con.query(sql, (err, result) => {
             if (err) throw err;
             console.log(result);
+            res.statusMessage = "Berhasil update soal";
             res.status(200).json({ message: "Berhasil mengubah soal praktek" });
         });
     }

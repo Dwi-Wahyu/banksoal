@@ -80,9 +80,12 @@ form.addEventListener("submit", (e) => {
                 "Content-Type": "application/json",
             },
         }).then((result) => {
-            $("#pesan-error").hide();
-            popup.style.display = "block";
-            popupSuccess.style.display = "flex";
+            if (result.statusText == "Berhasil update soal") {
+                location.reload();
+            }
+            // $("#pesan-error").hide();
+            // popup.style.display = "block";
+            // popupSuccess.style.display = "flex";
         });
     }
 });

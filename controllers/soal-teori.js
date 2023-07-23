@@ -381,6 +381,8 @@ teori.updateSoal = (req, res) => {
     const sql = `UPDATE soal_teori SET tinjauan1 = '${tinjauan1}', tinjauan2 = '${tinjauan2}', tinjauan3 = '${tinjauan3}', vignette = '${vignette}', pertanyaan = '${pertanyaan}', jawabanA = '${jawabanA}', jawabanB = '${jawabanB}', jawabanC = '${jawabanC}', jawabanD = '${jawabanD}', jawabanE = '${jawabanE}', kunci = '${kunci}', departemen = '${departemen}', alasan_singkat = '${alasan}', referensi = '${referensi}' WHERE id = '${req.params.id}';`;
     con.query(sql, (err, result) => {
         if (err) throw err;
+        res.statusMessage = "Berhasil update soal";
+        res.status(200).end();
         console.log(result);
     });
 };
