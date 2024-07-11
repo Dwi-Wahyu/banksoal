@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>BANKSOAL FKG</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/src/view/assets/img/favicon.png" rel="icon" />
+    <link href="/src/view/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="/src/view/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="/src/view/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/view/assets/css/template.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/lihat-soal.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/buat-soal.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/aspek.css" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <%- include('../../partials/header') %>
+
+    <!-- ======= Sidebar ======= -->
+    <%- include('../../partials/sidebar', { link: 'daftar-soal-praktek', parent: 'tulis-soal' }) %>
+    <!-- ======= End Sidebar ======= -->
+
+    <main id="main" class="main">
+      <section class="section">
+        <div class="card card-container">
+          <div class="card-judul">
+            <h1>Hapus Aspek Soal Uji Praktek</h1>
+            <hr />
+          </div>
+          <div class="content">
+            <label>Yakin Aspek Akan Di Hapus?</label>
+            <button class="btn btn-danger" style="margin-right: 0.5rem" id="hapusbtn">
+              Ya! Hapus Aspek
+            </button>
+            <a class="btn btn-primary" href="/tulis-soal/lihat-soal-praktek/<%= idSoal %>">Batal</a>
+          </div>
+          <input type="text" id="idAspek" value="<%= idAspek %>" class="d-none" />
+          <input type="text" id="idSoal" value="<%= idSoal %>" class="d-none" />
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="/src/view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/src/view/assets/js/main.js"></script>
+    <script src="/src/view/assets/js/dashboard.js"></script>
+    <script src="/src/view/assets/js/soal/praktek/hapus-aspek.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

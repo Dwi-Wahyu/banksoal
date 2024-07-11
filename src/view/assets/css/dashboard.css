@@ -1,0 +1,76 @@
+.info-box {
+  padding: 1rem;
+  background-color: rgb(57, 57, 243);
+  width: 100%;
+  border-radius: 5px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.info-wrap {
+  display: flex;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.info-box-word {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-box-word p,
+.info-box-word h1 {
+  margin: 0;
+  line-height: 1;
+  color: white;
+}
+
+.info-box-word p {
+  font-size: 0.75rem;
+  font-family: "Open Sans", sans-serif;
+  margin: 0 0 0.5rem 0;
+}
+
+.info-box-word h1 {
+  font-size: 1.8rem;
+}
+
+.info-box i {
+  font-size: 3rem;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.info-card {
+  padding-right: 0.7rem;
+}
+
+.info-card h1 {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.warning {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.warning h1 {
+  color: black;
+  font-weight: 550;
+  margin: 0;
+}
+
+.warning i {
+  font-size: 5rem;
+  color: red;
+}

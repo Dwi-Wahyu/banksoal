@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- <meta content="width=device-width, initial-scale=1.0" name="viewport" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>BANKSOAL FKG</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/src/view/assets/img/favicon.png" rel="icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geologica:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,200"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="/src/view/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="/src/view/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/view/assets/css/login.css" />
+  </head>
+
+  <body>
+    <main id="main" class="main">
+      <div class="card login-card">
+        <div class="title">
+          <h1>Selamat Datang !</h1>
+          <p>Masukkan username dan password Anda</p>
+        </div>
+
+        <form id="form">
+          <div>
+            <label for="user" class="form-label mb-1">Username</label>
+            <div class="input-group mb-4">
+              <input
+                type="email"
+                class="form-control"
+                id="user"
+                aria-describedby="inputGroupPrepend"
+                placeholder="Username"
+                required
+              />
+              <span class="input-group-text icon-box" id="inputGroupPrepend">
+                <i class="bi bi-person-fill"></i>
+              </span>
+              <div class="invalid-feedback" id="user-salah">Tidak ada username</div>
+            </div>
+          </div>
+          <div>
+            <label for="password" class="form-label mb-1">Password</label>
+            <div class="input-group mb-4">
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                aria-describedby="inputGroupPrepend"
+                placeholder="Password"
+                required
+              />
+              <span class="input-group-text icon-box">
+                <i class="bi bi-eye-slash" id="togglePassword"></i>
+              </span>
+              <div class="invalid-feedback" id="password-salah">Password salah</div>
+            </div>
+          </div>
+          <div class="col-12 text-center">
+            <button class="btn btn-primary w-100" id="login-btn" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- jquery -->
+    <script src="/src/view/assets/vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.6.4_jquery.min.js"></script>
+
+    <!-- Vendor JS Files -->
+    <script src="/src/view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/src/view/assets/js/login.js"></script>
+  </body>
+</html>

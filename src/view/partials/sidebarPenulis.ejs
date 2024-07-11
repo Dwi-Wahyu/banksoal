@@ -1,0 +1,81 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <!-- dashboard link -->
+    <% if (link == 'dashboard' && parent == 'dashboard') { %>
+    <li class="nav-item">
+      <a class="nav-link" href="/dashboard">
+        <i class="bi bi-house-door logo-sidebar"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <% } else { %>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="/dashboard">
+        <i class="bi bi-house-door logo-sidebar"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <% } %>
+    <!-- end dashboard link -->
+
+    <!-- tulis-soal link -->
+    <% if (parent == 'tulis-soal') { %>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-card-list logo-sidebar"></i>
+        <span>Tulis Soal</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <% if (link == 'daftar-soal-teori') { %>
+        <li>
+          <a href="/tulis-soal/daftar-soal-teori" class="active">
+            <i class="bi bi-circle"></i><span>Tulis Soal Uji Teori</span>
+          </a>
+        </li>
+        <li>
+          <a href="/tulis-soal/daftar-soal-praktek">
+            <i class="bi bi-circle"></i><span>Tulis Soal Uji Praktek</span>
+          </a>
+        </li>
+        <% } else if (link == 'daftar-soal-praktek') { %>
+        <li>
+          <a href="/tulis-soal/daftar-soal-teori">
+            <i class="bi bi-circle"></i><span>Tulis Soal Uji Teori</span>
+          </a>
+        </li>
+        <li>
+          <a href="/tulis-soal/daftar-soal-praktek" class="active">
+            <i class="bi bi-circle"></i><span>Tulis Soal Uji Praktek</span>
+          </a>
+        </li>
+        <% } %>
+      </ul>
+    </li>
+    <% } else { %>
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#components-nav"
+        data-bs-toggle="collapse"
+        href="#"
+      >
+        <i class="bi bi-card-list logo-sidebar"></i>
+        <span>Tulis Soal</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="/tulis-soal/daftar-soal-teori">
+            <i class="bi bi-circle"></i><span>Tulis Soal Uji Teori</span>
+          </a>
+        </li>
+        <li>
+          <a href="/tulis-soal/daftar-soal-praktek">
+            <i class="bi bi-circle"></i><span>Tulis Soal Uji Praktek</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    <% } %>
+    <!-- end tulis-soal link -->
+  </ul>
+</aside>

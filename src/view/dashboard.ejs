@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>BANKSOAL FKG</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/src/view/assets/img/favicon.png" rel="icon" />
+    <link href="/src/view/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="/src/view/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="/src/view/assets/css/style.css" rel="stylesheet" />
+    <link href="/src/view/assets/css/dashboard.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/view/assets/css/template.css" />
+  </head>
+
+  <body>
+    <%- include('./partials/header')%>
+
+    <!-- -->
+
+    <% if (roles === 'admin') { %>
+    <!--  -->
+    <%- include('./partials/sidebarAdmin', { link: 'dashboard', parent: 'dashboard' }) %>
+    <!--  -->
+    <% } else { %>
+    <!--  -->
+    <%- include('./partials/sidebarPenulis', { link: 'dashboard', parent: 'dashboard' }) %>
+    <!--  -->
+    <% } %>
+
+    <main id="main" class="main">
+      <div class="pagetitle d-flex justify-content-between">
+        <div class="row">
+          <h1>Dashboard</h1>
+        </div>
+        <div class="row">
+          <nav class="d-flex align-items-center">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section dashboard">
+        <div class="info-wrap">
+          <div class="info-box" style="background-color: rgb(81, 193, 251)">
+            <div class="info-box-word">
+              <p>JUMLAH SOAL TEORI</p>
+              <h1><%= infoBoxData.jumlahSoalTeori %></h1>
+            </div>
+            <i class="bi bi-card-list"></i>
+          </div>
+          <div class="info-box" style="background-color: rgb(211, 72, 72)">
+            <div class="info-box-word">
+              <p>JUMLAH SOAL PRAKTEK</p>
+              <h1><%= infoBoxData.jumlahSoalPraktek %></h1>
+            </div>
+            <i class="bi bi-card-list"></i>
+          </div>
+          <div class="info-box" style="background-color: rgb(181, 222, 61)">
+            <div class="info-box-word">
+              <p>JUMLAH PENULIS</p>
+              <h1><%= infoBoxData.jumlahPenulis %></h1>
+            </div>
+            <i class="bi bi-people"></i>
+          </div>
+        </div>
+
+        <div class="card p-4 mt-3">
+          <h3>Halo, <%= nama %> !</h3>
+
+          <% if (roles !== 'admin') { %>
+          <h5>Departemen, <%= namaDepartemen %></h5>
+          <% } %>
+
+          <p>
+            Selamat datang di aplikasi Bank Soal Di sini, Anda dapat dengan mudah mengelola dan
+            mengakses berbagai soal untuk kebutuhan pembelajaran dan evaluasi.
+          </p>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Fitur Utama:</li>
+            <li class="list-group-item">
+              Tambah dan Kelola Soal: Buat, edit, dan hapus soal dengan cepat dan mudah. Analisis
+            </li>
+            <li class="list-group-item">
+              Analisis Data: Lihat statistik soal dan kontribusi penulis.
+            </li>
+            <li class="list-group-item">
+              Data: Lihat statistik soal dan kontribusi penulis. Pencarian Efisien: Temukan soal
+              dengan filter yang komprehensif.
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="/src/view/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/src/view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/view/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="/src/view/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="/src/view/assets/vendor/quill/quill.min.js"></script>
+    <script src="/src/view/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="/src/view/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/src/view/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/src/view/assets/js/main.js"></script>
+    <script src="/src/view/assets/js/dashboard.js"></script>
+  </body>
+</html>

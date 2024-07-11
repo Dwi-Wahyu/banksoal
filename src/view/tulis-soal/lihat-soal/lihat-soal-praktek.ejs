@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>BANKSOAL FKG</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/src/view/assets/img/favicon.png" rel="icon" />
+    <link href="/src/view/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="/src/view/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="/src/view/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/view/assets/css/template.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/profil.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/lihat-soal.css" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <%- include('../../partials/header') %>
+
+    <!-- ======= Sidebar ======= -->
+    <%- include('../../partials/sidebar', { link: 'daftar-soal-praktek', parent: 'tulis-soal' }) %>
+    <!-- ======= End Sidebar ======= -->
+
+    <% for (const result of data) { %>
+    <main id="main" class="main">
+      <section class="section">
+        <div class="card card-container">
+          <div class="card-judul">
+            <h1>Lihat Soal Uji Praktek</h1>
+            <hr />
+          </div>
+          <div class="col-12">
+            <span class="judul-btn"> Tinjauan Soal</span>
+            <div class="subjudul-soal">
+              <label>No Register Soal</label>
+              <span> : </span>
+              <span
+                ><%= result.nomor + "/" + result.tinjauan1 + "/" + result.tinjauan2 + "/" +
+                result.tinjauan3 + "/" + result.tinjauan4 + "/" + result.bulan + "/" + result.tahun
+                %>
+              </span>
+            </div>
+            <div class="subjudul-soal">
+              <label>Tujuan</label>
+              <span> : </span>
+              <span> <%- result.tujuan %> </span>
+            </div>
+            <span class="judul-btn">Soal</span>
+            <div class="subjudul-soal">
+              <label>Skenario Klinik</label>
+
+              <span> : </span>
+              <p><%- result.skenario_klinik %></p>
+            </div>
+            <div class="subjudul-soal">
+              <label>Tugas Untuk Kandidat</label>
+              <span> : </span>
+              <span><%- result.tugas_kandidat %></span>
+            </div>
+            <div class="subjudul-soal">
+              <label>Tugas Untuk Penguji</label>
+              <span> : </span>
+              <span><%- result.tugas_penguji %></span>
+            </div>
+            <div class="subjudul-soal">
+              <label>Intruksi untuk Pasien Simulasi</label>
+              <span> : </span>
+              <span><%- result.intruksi_pasien %></span>
+            </div>
+            <div class="subjudul-soal">
+              <label>Peralatan yang dibutuhkan</label>
+              <span> : </span>
+              <span> <%- result.peralatan %> </span>
+            </div>
+            <div class="subjudul-soal">
+              <label>Gambar</label>
+              <span> : </span>
+              <div class="gambar">
+                <img
+                  src="../../../<%= result.gambar1 %>"
+                  class="gambar-soal"
+                  title="Gambar 1"
+                  alt=""
+                />
+                <img
+                  src="../../../<%= result.gambar2 %>"
+                  class="gambar-soal"
+                  title="Gambar 2"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="subjudul-soal">
+              <label>Referensi</label>
+              <span> : </span> <br />
+              <span><%= result.referensi %></span>
+            </div>
+            <div class="subjudul-soal">
+              <label>Penulis</label>
+              <span> : </span><br />
+              <span><%= result.pembuat %></span>
+            </div>
+            <div class="action mt-3 mb-3">
+              <button
+                class="btn btn-primary"
+                onclick="location.href='/tulis-soal/ubah-soal-praktek/<%= result.id %>'"
+              >
+                Ubah Soal
+              </button>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ganti-gambar">
+                Ubah Gambar
+              </button>
+              <% if (!result.gambar1 || !result.gambar2) { %>
+              <button
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#tambah-gambar"
+              >
+                Tambah Gambar
+              </button>
+              <% } %> <% if (result.gambar1 && result.gambar2) {%>
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus-gambar">
+                Hapus Gambar
+              </button>
+              <% } %>
+            </div>
+            <span class="judul-btn">Aspek Soal</span>
+            <% if (aspek.length > 0) { %>
+            <div class="mt-3">
+              <table class="table table-bordered" id="tabel">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col" style="width: 32%">Aspek yang di Nilai</th>
+                    <th scope="col">Skor 0</th>
+                    <th scope="col">Skor 1</th>
+                    <th scope="col">Skor 2</th>
+                    <th scope="col">Keterangan Skor</th>
+                    <th scope="col" style="width: 13%">Aksi</th>
+                  </tr>
+                </thead>
+                <% for (const [i, item] of aspek.entries()) { %>
+                <tbody>
+                  <tr>
+                    <th scope="row" style="text-align: center"><%= i + 1 %></th>
+                    <td><%- item.aspek_dinilai %></td>
+                    <% if (item.skor0 == 1) { %>
+                    <td></td>
+                    <% } else { %>
+                    <td class="skorNot"></td>
+                    <% } %> <% if (item.skor1 == 1) { %>
+                    <td></td>
+                    <% } else { %>
+                    <td class="skorNot"></td>
+                    <% } %> <% if (item.skor2 == 1) { %>
+                    <td></td>
+                    <% } else { %>
+                    <td class="skorNot"></td>
+                    <% } %>
+                    <td>
+                      <%- "01 : " + item.ket_skor0 + "<br /><br />" + "02 : " + item.ket_skor1 +
+                      "<br /><br />" + "03 : " + item.ket_skor2 %>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-primary dropdown-toggle"
+                            type="button"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            Pilih
+                          </button>
+                          <div class="dropdown-menu">
+                            <a
+                              class="dropdown-item"
+                              onclick="location.href=`/tulis-soal/tambah-aspek/<%= result.id %>`"
+                              >Tambah Aspek</a
+                            >
+                            <a
+                              class="dropdown-item"
+                              href="/tulis-soal/ubah-aspek/<%= result.id %>/<%= item.id %>"
+                              >Ubah Aspek</a
+                            >
+                            <a
+                              class="dropdown-item"
+                              href="/tulis-soal/<%= result.id %>/<%= item.id %>"
+                              >Hapus Aspek</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <input type="text" id="id-aspek" value="<%= item.id %>" class="d-none" />
+                <% } %>
+                <tfoot>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col" style="width: 32%">Aspek yang di Nilai</th>
+                    <th scope="col">Skor 0</th>
+                    <th scope="col">Skor 1</th>
+                    <th scope="col">Skor 2</th>
+                    <th scope="col">Keterangan Skor</th>
+                    <th scope="col" style="width: 13%">Aksi</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <% } else { %>
+            <div class="mt-3">
+              <table class="table table-bordered" id="tabel">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Aspek yang di Nilai</th>
+                    <th scope="col">Skor 0</th>
+                    <th scope="col">Skor 1</th>
+                    <th scope="col">Skor 2</th>
+                    <th scope="col">Keterangan Skor</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="7" style="text-align: center">
+                      <button
+                        class="btn btn-primary"
+                        onclick="location.href=`/tulis-soal/tambah-aspek/<%= result.id %>`"
+                      >
+                        Tambah Aspek
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col" style="width: 32%">Aspek yang di Nilai</th>
+                    <th scope="col">Skor 0</th>
+                    <th scope="col">Skor 1</th>
+                    <th scope="col">Skor 2</th>
+                    <th scope="col">Keterangan Skor</th>
+                    <th scope="col" style="width: 13%">Aksi</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <% } %>
+          </div>
+        </div>
+        <input type="text" id="idSoal" value="<%= result.id %>" class="d-none" />
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <!-- modal ganti gambar -->
+    <div class="modal fade" id="ganti-gambar" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form id="form">
+            <div class="modal-header">
+              <h5 class="modal-title" style="font-weight: 600">Ganti Gambar</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="gambar">
+                <div class="input-gambar">
+                  <% if (!result.gambar2) { %>
+                  <input
+                    type="file"
+                    name="gambar"
+                    id="gambar1"
+                    required
+                    class="input-container mb-2"
+                  />
+                  <% } else { %>
+                  <label for="gambar1" style="font-weight: 550">Gambar 1</label>
+                  <input type="file" name="gambar" id="gambar1" class="input-container mb-2" />
+                  <label for="gambar2" style="font-weight: 550; margin-top: 8px">Gambar 2</label>
+                  <input type="file" name="gambar" id="gambar2" class="input-container mb-2" />
+                  <% } %>
+                </div>
+                <p class="m-1">
+                  <strong> Perhatian: </strong>
+                  Gambar Tidak boleh lebih dari 1024 KB atau 1 MB, ukuran dimensi gambar maksimal
+                  lebar 128 pixel dan tinggi 128 pixel.
+                </p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="ganti-gambar">Ganti Gambar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Basic Modal-->
+
+    <!-- modal tambah gambar -->
+    <div class="modal fade" id="tambah-gambar" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form id="tambah-gambar">
+            <div class="modal-header">
+              <h5 class="modal-title" style="font-weight: 600">Tambah Gambar</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="gambar">
+                <div class="input-gambar">
+                  <input
+                    type="file"
+                    name="gambar"
+                    id="gambar"
+                    required
+                    class="input-container mb-2"
+                  />
+                </div>
+                <p class="m-1">
+                  <strong> Perhatian: </strong>
+                  Gambar Tidak boleh lebih dari 1024 KB atau 1 MB, ukuran dimensi gambar maksimal
+                  lebar 128 pixel dan tinggi 128 pixel.
+                </p>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" id="tambah-gambar">
+                Tambah Gambar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Basic Modal-->
+
+    <!-- modal tambah gambar -->
+    <div class="modal fade" id="hapus-gambar" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" style="font-weight: 600">Hapus Gambar</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body d-flex justify-content-around align-items-center">
+            <div class="gambar1 d-flex flex-column align-items-center">
+              <img src="../../../<%= result.gambar1 %>" alt="" style="max-width: 10rem" />
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: fit-content; margin-top: 1rem !important"
+                id="hapus-gambar1"
+              >
+                Hapus Gambar 1
+              </button>
+            </div>
+            <div class="gambar2 d-flex flex-column align-items-center">
+              <img src="../../../<%= result.gambar2 %>" alt="" style="max-width: 10rem" />
+              <button
+                type="submit"
+                class="btn btn-primary"
+                style="width: fit-content; margin-top: 1rem !important"
+                id="hapus-gambar2"
+              >
+                Hapus Gambar 2
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Basic Modal-->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="/src/view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/view/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="/src/view/assets/js/soal/praktek/lihat-soal.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/src/view/assets/js/main.js"></script>
+    <script src="/src/view/assets/js/soal/praktek/lihat-soal.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <% } %>
+  </body>
+</html>

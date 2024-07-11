@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>BANKSOAL FKG</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/src/view/assets/img/favicon.png" rel="icon" />
+    <link href="/src/view/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="/src/view/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.snow.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="/src/view/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/view/assets/css/template.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/lihat-soal.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/buat-soal.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/aspek.css" />
+  </head>
+
+  <body>
+    <div class="popup-info-wrap">
+      <div class="popup-wrap" id="popup-success">
+        <div class="popup-info">
+          <div class="popup-title-success">
+            <h1>Info</h1>
+            <i class="bi bi-x-lg closebtn" onclick="close()"></i>
+          </div>
+          <div class="popup-body">
+            <p>Berhasil menambahkan aspek</p>
+          </div>
+          <div class="popup-footer">
+            <div class="popup-button">
+              <span></span>
+              <button class="btn btn-primary closebtn" onclick="close()" id="closeBTN">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-wrap" id="popup-fail">
+        <div class="popup-info">
+          <div class="popup-title-fail">
+            <h1>Info</h1>
+            <i class="bi bi-x-lg closebtn" onclick="close()"></i>
+          </div>
+          <div class="popup-body">
+            <p class="warning-msg"></p>
+          </div>
+          <div class="popup-footer">
+            <div class="popup-button">
+              <span></span>
+              <button class="btn btn-primary closebtn" onclick="close()" id="closeBTN">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <%- include('../../partials/header') %>
+
+    <!-- ======= Sidebar ======= -->
+    <%- include('../../partials/sidebar', { link: 'daftar-soal-praktek', parent: 'tulis-soal' }) %>
+    <!-- ======= End Sidebar ======= -->
+
+    <main id="main" class="main">
+      <section class="section">
+        <div class="card card-container">
+          <div>
+            <!-- Default Tabs -->
+            <ul class="nav nav-tabs tabulasi" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="home-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#home"
+                  type="button"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="true"
+                >
+                  Aspek
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="profile-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile"
+                  aria-selected="false"
+                >
+                  Soal
+                </button>
+              </li>
+
+              <h4 style="margin-bottom: 0; display: flex; align-items: center; margin-left: 11rem">
+                Tambah Aspek Soal Uji Praktek Pada Telaah Lokal
+              </h4>
+            </ul>
+            <% for (const result of data) { %>
+            <div class="tab-content pt-2" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <!-- <div class="jawaban row mt-2">
+                                    <div>
+                                        <div
+                                            class="col-lg-12 col-md-12 col-xs-4 mb-1"
+                                        >
+                                            <label for="jawaban_a"
+                                                >Nomor Urut Aspek (isi dengan
+                                                angka) * :</label
+                                            >
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="text"
+                                                name="jawaban_a"
+                                                id="jawaban_a"
+                                                class="col-lg-12 col-md-12"
+                                                placeholder="Pilihan A"
+                                            />
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                <form id="tambah-aspek">
+                  <div class="Aspek mt-2 mb-3">
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group mb-1">
+                      <label for="Aspek" class="mb-1">Aspek Yang Di Nilai * :</label>
+                      <textarea id="aspek-dinilai"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="skor-gambar-wrap row">
+                    <div class="skor col-md-2">
+                      <label class="mb-1">Skor Yang Di Nilai * :</label>
+                      <div class="checkbox">
+                        <div class="input-skor">
+                          <input type="checkbox" name="skor" class="skor0" id="skor0" />
+                          <label for="skor0">0</label>
+                        </div>
+                        <div class="input-skor">
+                          <input type="checkbox" name="skor" class="skor1" id="skor1" />
+                          <label for="skor1">1</label>
+                        </div>
+                        <div class="input-skor">
+                          <input type="checkbox" name="skor" class="skor2" id="skor2" />
+                          <label for="skor2">2</label>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="gambar col-md-10">
+                                        <div class="label-gambar mb-1">
+                                            <label for="gambar"
+                                                >Gambar Aspek *:</label
+                                            >
+                                        </div>
+                                        <div class="input-gambar">
+                                            <input
+                                                type="file"
+                                                name="gambar"
+                                                id="gambar"
+                                                class="input-container"
+                                                title="Tidak ada berkas"
+                                            />
+                                            <p>
+                                                <strong> Perhatian: </strong>
+                                                Gambar Tidak boleh lebih dari
+                                                1024 KB atau 1 MB, ukuran
+                                                dimensi gambar maksimal lebar
+                                                500 pixel dan tinggi 500 pixel.
+                                            </p>
+                                        </div>
+                                    </div> -->
+                  </div>
+
+                  <div class="keterangan-skor jawaban mt-2 mb-3">
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group mb-1">
+                      <label for="Aspek" class="mb-1">Keterangan Skor * :</label>
+                      <div class="keterangan-skor-input">
+                        <input
+                          type="text"
+                          name="skor"
+                          id="inp-skor0"
+                          placeholder="skor 0"
+                          class="mb-1"
+                        />
+                        <input
+                          type="text"
+                          name="skor"
+                          id="inp-skor1"
+                          placeholder="skor 1"
+                          class="mb-1"
+                        />
+                        <input type="text" name="skor" id="inp-skor2" placeholder="skor 2" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="action-tambah">
+                    <button class="btn btn-primary" type="submit">Simpan</button>
+                    <a
+                      class="btn btn-success"
+                      href="/tulis-soal/lihat-soal-praktek/<%= result.id %>"
+                    >
+                      Selesai
+                    </a>
+                  </div>
+                </form>
+
+                <% if (aspek.length > 0) { %>
+                <div class="mt-3">
+                  <table class="table table-bordered" id="tabel">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col" style="width: 32%">Aspek yang di Nilai</th>
+                        <th scope="col">Skor 0</th>
+                        <th scope="col">Skor 1</th>
+                        <th scope="col">Skor 2</th>
+                        <th scope="col">Keterangan Skor</th>
+                        <th scope="col" style="width: 13%">Aksi</th>
+                      </tr>
+                    </thead>
+                    <% for (const [i, item] of aspek.entries()) { %>
+                    <tbody>
+                      <tr>
+                        <th scope="row" style="text-align: center"><%= i + 1 %></th>
+                        <td><%- item.aspek_dinilai %></td>
+                        <% if (item.skor0 == 1) { %>
+                        <td></td>
+                        <% } else { %>
+                        <td class="skorNot"></td>
+                        <% } %> <% if (item.skor1 == 1) { %>
+                        <td></td>
+                        <% } else { %>
+                        <td class="skorNot"></td>
+                        <% } %> <% if (item.skor2 == 1) { %>
+                        <td></td>
+                        <% } else { %>
+                        <td class="skorNot"></td>
+                        <% } %>
+                        <td>
+                          <%- "01 : " + item.ket_skor0 + "<br /><br />" + "02 : " + item.ket_skor1 +
+                          "<br /><br />" + "03 : " + item.ket_skor2 %>
+                        </td>
+                        <td>
+                          <div class="input-group">
+                            <div class="input-group-append">
+                              <button
+                                class="btn btn-primary dropdown-toggle"
+                                type="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                              >
+                                Pilih
+                              </button>
+                              <div class="dropdown-menu">
+                                <a
+                                  class="dropdown-item"
+                                  href="/tulis-soal/ubah-aspek/<%= result.id %>/<%= item.id %>"
+                                  >Ubah Aspek</a
+                                >
+                                <a
+                                  class="dropdown-item"
+                                  href="/tulis-soal/<%= result.id %>/<%= item.id %>"
+                                  >Hapus Aspek</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <% } %>
+                    <tfoot>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col" style="width: 32%">Aspek yang di Nilai</th>
+                        <th scope="col">Skor 0</th>
+                        <th scope="col">Skor 1</th>
+                        <th scope="col">Skor 2</th>
+                        <th scope="col">Keterangan Skor</th>
+                        <th scope="col" style="width: 13%">Aksi</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <% } else { %>
+                <div class="mt-3">
+                  <table class="table table-bordered" id="tabel">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Aspek yang di Nilai</th>
+                        <th scope="col">Skor 0</th>
+                        <th scope="col">Skor 1</th>
+                        <th scope="col">Skor 2</th>
+                        <th scope="col">Keterangan Skor</th>
+                        <th scope="col">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="7" style="text-align: center">
+                          <button class="btn btn-primary">Tambah Aspek</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Aspek yang di Nilai</th>
+                        <th scope="col">Skor 0</th>
+                        <th scope="col">Skor 1</th>
+                        <th scope="col">Skor 2</th>
+                        <th scope="col">Keterangan Skor</th>
+                        <th scope="col">Aksi</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <% } %>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="subjudul-soal">
+                  <label>No Register Soal</label>
+                  <span> : </span>
+                  <span
+                    ><%= result.nomor + "/" + result.tinjauan1 + "/" + result.tinjauan2 + "/" +
+                    result.tinjauan3 + "/" + result.tinjauan4 + "/" + result.bulan + "/" +
+                    result.tahun %>
+                  </span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Tujuan</label>
+                  <span> : </span>
+                  <span> <%- result.tujuan %> </span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Skenario Klinik</label>
+
+                  <span> : </span>
+                  <span><%- result.skenario_klinik %></span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Tugas Untuk Kandidat</label>
+                  <span> : </span>
+                  <span><%- result.tugas_kandidat %></span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Tugas Untuk Penguji</label>
+                  <span> : </span>
+                  <span><%- result.tugas_penguji %></span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Intruksi untuk Pasien Simulasi</label>
+                  <span> : </span>
+                  <span><%- result.intruksi_pasien %></span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Peralatan yang dibutuhkan</label>
+                  <span> : </span>
+                  <span> <%- result.peralatan %> </span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Gambar Soal</label>
+                  <span> : </span>
+                  <div class="gambar">
+                    <img src="../../../<%= result.gambar1 %>" alt="" class="gambar-soal" />
+                    <img src="../../../<%= result.gambar2 %>" alt="" class="gambar-soal" />
+                  </div>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Referensi</label>
+                  <span> : </span> <br />
+                  <span><%= result.referensi %></span>
+                </div>
+                <div class="subjudul-soal">
+                  <label>Penulis</label>
+                  <span> : </span><br />
+                  <span><%= result.pembuat %></span>
+                </div>
+              </div>
+            </div>
+            <input id="id" style="display: none" value="<%= result.id %>" />
+            <% } %>
+            <!-- End Default Tabs -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <script src="/src/view/assets/vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.6.4_jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
+
+    <!-- Vendor JS Files -->
+    <script src="/src/view/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="/src/view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/view/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="/src/view/assets/vendor/quill/quill.min.js"></script>
+    <script src="/src/view/assets/vendor/simple-datatables/simple-datatables.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/src/view/assets/js/main.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <script src="/src/view/assets/js/soal/praktek/tambah-aspek.js"></script>
+  </body>
+</html>

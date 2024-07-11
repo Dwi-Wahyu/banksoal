@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>BANKSOAL FKG</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/src/view/assets/img/favicon.png" rel="icon" />
+    <link href="/src/view/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="/src/view/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/src/view/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="/src/view/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/view/assets/css/template.css" />
+    <link rel="stylesheet" href="/src/view/assets/css/buat-soal.css" />
+  </head>
+
+  <body>
+    <div class="popup-info-wrap">
+      <div class="popup-wrap" id="popup-success">
+        <div class="popup-info">
+          <div class="popup-title-success">
+            <h1>Info</h1>
+            <i class="bi bi-x-lg closebtn" onclick="close()"></i>
+          </div>
+          <div class="popup-body">
+            <p>Berhasil input soal</p>
+          </div>
+          <div class="popup-footer">
+            <div class="popup-button">
+              <span></span>
+              <button class="btn btn-primary closebtn" onclick="close()" id="closeBTN">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- header -->
+    <%- include('../partials/header') %>
+
+    <!-- sidebar -->
+    <%- include('../partials/sidebar', { link: 'daftar-soal-teori', parent: 'tulis-soal' }) %>
+
+    <main id="main" class="main">
+      <section class="section">
+        <div class="card card-container">
+          <div class="card-judul">
+            <h1>Tambah Soal Uji Teori</h1>
+            <hr />
+          </div>
+          <form id="tambah-soal-teori">
+            <div class="tinjauan">
+              <div class="row mb-2 mt-2">
+                <!-- Tinjauan 1 -->
+                <div class="col-md-6 col-sm-12 form-group">
+                  <label for="tinjauan1" class="mb-1 tinjauan-label"
+                    >TINJAUAN 1: KOMPETENSI UTAMA *:
+                  </label>
+                  <select name="tinjauan1" id="tinjauan1" class="select2_single form-control">
+                    <option></option>
+                    <option value="01.1">01.1 Etik dan Jurispurensi</option>
+                    <option value="02.1">
+                      02.1 Analisis Informasi Kesehatan Secara Kritis, Ilmiah dan Efektif
+                    </option>
+                    <option value="03.1">03.1 Komunikasi</option>
+                    <option value="04.1">
+                      04.1 Hubungan Sosio Kultural dalam Bidang Kesehatan Gigi Mulut
+                    </option>
+                    <option value="05.1">05.1 Ilmu Kedokteran Dasar</option>
+                    <option value="06.1">06.1 Ilmu Kedokteran Klinik</option>
+                    <option value="07.1">
+                      07.1 Ilmu Kedokteran Gigi Dasar dan Ilmu Kedokteran Gigi Terapan
+                    </option>
+                    <option value="08.1">08.1 Ilmu Kedokteran Gigi Klinik</option>
+                    <option value="09.1">09.1 Pemeriksaan Pasien</option>
+                    <option value="10.1">10.1 Diagnosis</option>
+                    <option value="11.1">11.1 Rencana Perawatan</option>
+                    <option value="12.1">12.1 Pengelolaan Sakit dan Kecemasan</option>
+                    <option value="13.1">13.1 Tindakan Medik Kedokteran Gigi</option>
+                    <option value="13.2">13.2 Tindakan Medik Kedokteran Gigi</option>
+                    <option value="14.1">
+                      14.1 Melakukan Pelayanan Kesehatan Gigi Mulut Masyarakat
+                    </option>
+                    <option value="15.1">15.1 Manajemen Perilaku</option>
+                    <option value="15.2">15.2 Manajemen Perilaku</option>
+                    <option value="16.1">16.1 Manajemen Praktik dan Lingkungan Kerja</option>
+                  </select>
+                </div>
+                <!-- end tinjauan 1 -->
+
+                <!-- Tinjauan 3 -->
+                <div class="col-md-6 col-sm-12 form-group">
+                  <label for="tinjauan3" class="mb-1 tinjauan-label"
+                    >TINJAUAN 3: Bidang Ilmu & Keterampilan KG *:
+                  </label>
+                  <select name="tinjauan3" id="tinjauan3" class="select2_single form-control">
+                    <option></option>
+                    <option value="K.0a">
+                      K.0a Profesionalisme : Etika Hukum, Komunikasi, Metodologi penelitian
+                    </option>
+                    <option value="K.0b">K.0b Biomaterial dan Teknologi KG</option>
+                    <option value="K.0c">K.0c Biologi Oral</option>
+                    <option value="K.0d">K.0d Biomedik</option>
+                    <option value="K.0e">K.0e Patologi Oral</option>
+                    <option value="K.0f">K.0f Patologi Klinik</option>
+                    <option value="K.0g">K.0g Patologi Anatomi</option>
+                    <option value="K.01">K.01 Penyakit Mulut</option>
+                    <option value="K.02">K.02 Bedah mulut dan maksilofasial</option>
+                    <option value="K.03">K.03 Kedokteran Gigi Anak</option>
+                    <option value="K.04">K.04 Konservasi Gigi</option>
+                    <option value="K.05">K.05 Periodonti</option>
+                    <option value="K.06">K.06 Prostodonti</option>
+                    <option value="K.07">K.07 Ortodonti</option>
+                    <option value="K.08">K.08 Radiologi Kedokteran Gigi</option>
+                    <option value="K.09">K.09 Kesehatan Gigi Masyarakat</option>
+                    <option value="K.10">K.10 Kedokteran Gigi Forensik</option>
+                  </select>
+                </div>
+                <!-- end tinjauan 3 -->
+              </div>
+
+              <div class="row mb-3">
+                <!-- Tinjauan 2 -->
+                <div class="col-md-12 col-sm-12 form-group">
+                  <label for="tinjauan2" class="mb-1 tinjauan-label"
+                    >TINJAUAN 2: Penyakit / Kelainan *:
+                  </label>
+                  <select name="tinjauan2" id="tinjauan2" class="select2_single form-control">
+                    <option></option>
+                    <option value="P.00">P.00 Tidak terkait penyakit/kelainan</option>
+                    <option value="P.01">
+                      P.01 Gangguan pertumbuhan dan eruspsi gigi (Disorders of tooth development and
+                      eruption)
+                    </option>
+                    <option value="P.02">
+                      P.02 Gigi terpendam dan impaksi (Embedded and impacted teeth)
+                    </option>
+                    <option value="P.03">P.03 Karies (Dental Caries)</option>
+                    <option value="P.04">
+                      P.04 Penyakit lain jaringan keras gigi (Other diseases of hard tissues of
+                      teeth)
+                    </option>
+                    <option value="P.05">
+                      P.05 Penyakit jaringan pulpa dan periapikal (Diseases of pulp and periapical
+                      tissues)
+                    </option>
+                    <option value="P.06">
+                      P.06 Gingivitis dan penyakit periodontal (Gingivitis and periodontal diseases)
+                    </option>
+                    <option value="P.07">
+                      P.07 Kelainan lain gusi dan edentulous alveolar ridge (Other disorders of
+                      gingiva and edentulous alveolar ridge)
+                    </option>
+                    <option value="P.08">
+                      P.08 Anomali dentofasial (Dentofacial anomalies [including malocclusion])
+                    </option>
+                    <option value="P.09">
+                      P.09 Kelainan lain gigi dan struktur pendukungnya (Other disorders of teeth
+                      and supporting structures)
+                    </option>
+                    <option value="P.10">
+                      P.10 Kista (Cysts of oral region, not elsewhere classified)
+                    </option>
+                    <option value="P.11">
+                      P.11 Penyakit lain pada rahang (Other diseases of jaws)
+                    </option>
+                    <option value="P.12">
+                      P.12 Penyakit kelenjar ludah (Diseases of salivary glands)
+                    </option>
+                    <option value="P.13">
+                      P.13 Stomatitis dan lesi terkait (Stomatitis and related lesions)
+                    </option>
+                    <option value="P.14">
+                      P.14 Penyakit lain bibir dan mukosa mulut (Other diseases of lip and oral
+                      mucosa)
+                    </option>
+                    <option value="P.15">P.15 Penyakit lidah (Diseases of tongue)</option>
+                    <option value="P.16">
+                      P.16 Masalah dental terkait mental dan gangguan perilaku (Dental problem
+                      Associate with Mental and behavioural disorders)
+                    </option>
+                    <option value="P.17">
+                      P.17 Masalah rongga mulut terkait penyakit lainnya (Oral problem Associate
+                      with others)
+                    </option>
+                  </select>
+                </div>
+                <!-- end tinjauan 2 -->
+              </div>
+            </div>
+
+            <div class="vignette mb-3">
+              <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                <label for="vignette" class="mb-1">Vignette * :</label>
+                <textarea class="editor" name="vignette" id="vignette"></textarea>
+              </div>
+            </div>
+
+            <div class="pertanyaan mb-3">
+              <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                <label for="pertanyaan" class="mb-1">Pertanyaan / instruksi * :</label>
+                <textarea class="editor" name="pertanyaan" id="pertanyaan"></textarea>
+              </div>
+            </div>
+
+            <div class="gambar mb-3">
+              <div class="label-gambar mb-1">
+                <label for="gambar">Gambar Soal *:</label>
+              </div>
+              <div class="input-gambar">
+                <input
+                  type="file"
+                  name="gambar"
+                  id="gambar"
+                  class="input-container"
+                  title="Tidak ada berkas"
+                />
+                <p>
+                  <strong> Perhatian: </strong>
+                  Gambar Tidak boleh lebih dari 1024 KB atau 1 MB, ukuran dimensi gambar maksimal
+                  lebar 500 pixel dan tinggi 500 pixel.
+                </p>
+              </div>
+            </div>
+
+            <div class="jawaban row">
+              <div>
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1">
+                  <label for="jawaban_a">Pilihan A * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="jawaban_a"
+                    id="jawaban_a"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Pilihan A"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1 mt-2">
+                  <label for="jawaban_b">Pilihan B * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="jawaban_b"
+                    id="jawaban_b"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Pilihan B"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1 mt-2">
+                  <label for="jawaban_c">Pilihan C * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="jawaban_c"
+                    id="jawaban_c"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Pilihan C"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1 mt-2">
+                  <label for="jawaban_d">Pilihan D * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="jawaban_d"
+                    id="jawaban_d"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Pilihan D"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1 mt-2">
+                  <label for="jawaban_e">Pilihan E * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="jawaban_e"
+                    id="jawaban_e"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Pilihan E"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2">
+              <!-- kunci jawaban -->
+              <div class="col-md-3 form-group">
+                <label for="kunci_jawaban" class="mb-1 tinjauan-label">Kunci Jawaban * : </label>
+                <select name="kunci_jawaban" id="kunci" class="select2_single form-control">
+                  <option></option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
+              <!-- end kunci jawaban -->
+
+              <!-- Departemen -->
+              <div class="col-md-9 form-group">
+                <label for="departemen" class="mb-1 tinjauan-label">Departemen * : </label>
+                <select name="departemen" id="departemen" class="select2_single form-control">
+                  <option></option>
+                  <option value="1">Biologi Oral</option>
+                  <option value="13">Biomedik</option>
+                  <option value="2">Dental Material</option>
+                  <option value="4">
+                    Ilmu Bedah Mulut dan Maksilofasial (Oral and Maxillofacial Surgery)
+                  </option>
+                  <option value="5">Ilmu Kedokteran Gigi Anak (Pediatric Dentistry)</option>
+                  <option value="11">Ilmu Kedokteran Gigi dan Mulut Masyarakat</option>
+                  <option value="12">Ilmu Kedokteran Gigi Interdisiplin</option>
+                  <option value="14">Ilmu Konservasi Gigi</option>
+                  <option value="6">Ilmu Penyakit Mulut (Oral Medicine)</option>
+                  <option value="7">Orthodonsia (Orthodontics)</option>
+                  <option value="3">Patologi Mulut dan Maksilofasial</option>
+                  <option value="8">Periodonsia (Periodontics)</option>
+                  <option value="9">Prostodonsia (Prosthodontics)</option>
+                  <option value="10">
+                    Radiologi Kedokteran Gigi (Oral and Maxillofacial Radiology)
+                  </option>
+                </select>
+              </div>
+            </div>
+            <!-- end Departemen -->
+
+            <div class="row alasan referensi mb-2">
+              <div class="mb-2">
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1 mt-2">
+                  <label for="alasan_singkat">Alasan Singkat * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="alasan_singkat"
+                    id="alasan_singkat"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Alasan Singkat"
+                  />
+                </div>
+              </div>
+              <div>
+                <div class="col-lg-12 col-md-12 col-xs-4 mb-1">
+                  <label for="referensi">Referensi * :</label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="referensi"
+                    id="referensi"
+                    class="col-lg-12 col-md-12"
+                    placeholder="Referensi"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row penulis institusi">
+              <div class="col-md-6 col-sm-12 form-group">
+                <label for="Penulis" class="form-label mb-1">Penulis :</label>
+                <input
+                  type="text"
+                  name="Penulis"
+                  class="form-control"
+                  id="Penulis"
+                  value="<%= nama %>"
+                  disabled
+                />
+              </div>
+              <div class="col-md-6 col-sm-12 form-group">
+                <label for="institusi" class="form-label mb-1">Institusi :</label>
+                <input
+                  type="text"
+                  name="institusi"
+                  class="form-control"
+                  id="institusi"
+                  value="Fakultas Kedokteran Gigi Universitas Hasanuddin - Makassar"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div>
+                <button class="btn btn-primary" id="submit" type="submit">Simpan</button>
+
+                <a
+                  class="btn btn-primary"
+                  href="/tulis-soal/daftar-soal-teori"
+                  style="margin-left: 0.5rem"
+                >
+                  Kembali
+                </a>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-12">
+                <div
+                  class="alert alert-danger alert-dismissible collapse"
+                  id="pesan-error"
+                  style="padding: 1rem"
+                  role="alert"
+                >
+                  <div
+                    class="pesan-error d-flex mb-2"
+                    style="border-bottom: solid #842029 thin; padding-bottom: 0.5rem"
+                  >
+                    <i class="bi bi-exclamation-octagon" style="margin: 0 0.5rem 0 0"></i>
+                    <h5 class="alert-heading" style="margin: 0">Mohon sertakan</h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="alert"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+
+                  <span id="warning-msg"></span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- jQuery -->
+    <script src="/src/view/assets/vendor/jquery/ajax.googleapis.com_ajax_libs_jquery_3.6.4_jquery.min.js"></script>
+
+    <script src="/src/view/assets/vendor/tinymce/tinymce.min.js"></script>
+
+    <!-- Vendor JS Files -->
+    <script src="/src/view/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="/src/view/assets/js/main.js"></script>
+    <script src="/src/view/assets/js/soal/select2.js"></script>
+    <script src="/src/view/assets/js/soal/teori/buat-soal.js"></script>
+
+    <!-- Select2 -->
+    <script>
+      $(document).ready(function () {
+        $(".select2_single").select2({
+          placeholder: "Pilih Salah Satu",
+          allowClear: true,
+        })
+        $(".select2_group").select2({})
+        $(".select2_multiple").select2({
+          placeholder: "Pilih Minimal Satu",
+          allowClear: true,
+        })
+      })
+      $("#departemen").val("<%= departemen %>")
+      $("#departemen").prop("disabled", true)
+    </script>
+    <!-- /Select2 -->
+
+    <% if (departemen == "admin") { %>
+    <script>
+      // $("#departemen").val("<%= departemen %>");
+      $("#departemen").prop("disabled", false)
+    </script>
+    <% } else { %>
+    <script>
+      $("#departemen").val("<%= departemen %>")
+      $("#departemen").prop("disabled", true)
+    </script>
+    <% } %>
+
+    <script src="/src/view/assets/js/tinyMCE-script.js"></script>
+  </body>
+</html>

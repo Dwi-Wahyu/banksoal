@@ -1,1 +1,0 @@
-# banksoal_fkg
